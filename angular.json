@@ -3,5 +3,124 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-bsl": {
+      "projectType": "library",
+      "root": "projects/ngx-bsl",
+      "sourceRoot": "projects/ngx-bsl/src",
+      "prefix": "ngx-bsx",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-bsl/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-bsl/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-bsl/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-bsl/**/*.ts",
+              "projects/ngx-bsl/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-bsl-test-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngx-bsl-test-app",
+      "sourceRoot": "projects/ngx-bsl-test-app/src",
+      "prefix": "ngx-bsa-test-app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/ngx-bsl-test-app/src/main.ts",
+            "tsConfig": "projects/ngx-bsl-test-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngx-bsl-test-app/public"
+              }
+            ],
+            "styles": [
+              "projects/ngx-bsl-test-app/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngx-bsl-test-app:build:production"
+            },
+            "development": {
+              "buildTarget": "ngx-bsl-test-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-bsl-test-app/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngx-bsl-test-app/public"
+              }
+            ],
+            "styles": [
+              "projects/ngx-bsl-test-app/src/styles.scss"
+            ]
+          }
+        }
+      }
+    }
   }
 }
