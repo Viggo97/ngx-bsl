@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   `,
     styles: '',
 })
-export class NgxBslTest implements OnInit {
+export class NgxBsl implements OnInit {
 
     ngOnInit(): void {
         console.log('NgBslTest component');
