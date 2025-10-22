@@ -1,1 +1,1 @@
-export {NgxBslTest} from './lib/ngx-bsl';
+export {NgxBsl} from './lib/ngx-bsl';
