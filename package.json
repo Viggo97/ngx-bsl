@@ -9,7 +9,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "private": true,
   "dependencies": {
     "@angular/cdk": "^20.2.8",
     "@angular/common": "^20.1.0",
