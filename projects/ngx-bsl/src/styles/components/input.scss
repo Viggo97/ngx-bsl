@@ -1,0 +1,62 @@
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: .5rem .75rem;
+  background-color: var(--bsl-input-backgroundColor);
+  border: 1px solid var(--bsl-input-borderColor);
+  border-radius: 6px;
+  color: var(--bsl-textColor);
+  font: var(--bsl-font-sm);
+  line-height: var(--bsl-line-height-sm);
+
+  &:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &::placeholder {
+    color: var(--bsl-input-textColor-placeholder);
+  }
+}
+
+.input-with-icon {
+  position: relative;
+
+  input {
+    padding-left: 2rem;
+  }
+
+  [class^="icon-"] {
+    position: absolute;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+    font: var(--bsl-font-md);
+    color: var(--bsl-input-textColor);
+  }
+}
+
+.input-large {
+  input {
+    padding: .75rem 1.5rem .75rem 3rem;
+    font: var(--bsl-font-lg);
+  }
+
+  [class^="icon-"] {
+    left: 1rem;
+    font: var(--bsl-font-lg);
+  }
+}
+
+/* Remove arrows Chrome */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
