@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 
+export {ComboboxComponent} from './lib/components/combobox/combobox.component';
+
 export {ListBoxComponent} from './lib/components/list-box/list-box.component';
 export {ListBoxGroupComponent} from './lib/components/list-box/list-box-group/list-box-group.component';
 export {ListBoxOptionComponent} from './lib/components/list-box/list-box-option/list-box-option.component';
