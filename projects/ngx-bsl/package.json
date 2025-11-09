@@ -2,6 +2,7 @@
   "name": "ngx-bsl",
   "version": "0.0.3",
   "peerDependencies": {
+    "@angular/animations": "^20.3.0",
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
   },
