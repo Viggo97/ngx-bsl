@@ -1,0 +1,31 @@
+@use '../../../../styles/mixins';
+
+:host {
+    position: relative;
+    padding: .375rem 1.25rem .375rem .5rem;
+    border-radius: 4px;
+    font: var(--bsl-font-sm);
+    color: var(--bsl-textColor);
+    cursor: pointer;
+    @include mixins.ellipsis;
+
+    &:hover,
+    &.visual-focus {
+        background-color: var(--bsl-list-box-backgroundColor-hover);
+    }
+
+    &[aria-selected="true"] {
+        ngx-bsl-icon-check {
+            display: inline;
+            visibility: visible;
+        }
+    }
+
+    ngx-bsl-icon-check {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        right: 0;
+        color: red;
+    }
+}
