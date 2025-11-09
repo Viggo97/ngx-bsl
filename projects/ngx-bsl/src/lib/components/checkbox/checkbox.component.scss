@@ -1,0 +1,33 @@
+:host {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font: var(--bsl-font-sm);
+}
+
+.checkbox {
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bsl-checkbox-backgroundColor);
+    border: 1px solid var(--bsl-checkbox-borderColor);
+    border-radius: 4px;
+    color: var(--bsl-checkbox-textColor);
+
+    &:focus-visible {
+        outline-offset: 2px;
+    }
+
+    &:hover {
+        border-color: var(--bsl-checkbox-borderColor-hover);
+    }
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

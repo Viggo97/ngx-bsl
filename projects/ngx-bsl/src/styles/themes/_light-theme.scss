@@ -14,19 +14,17 @@
   --bsl-button-backgroundColor-hover: var(--bsl-color-neutral-100);
   --bsl-button-backgroundColor-active: var(--bsl-color-neutral-200);
   --bsl-button-borderColor: var(--bsl-color-neutral-300);
-  --bsl-button-textColor: var(--textColor);
+  --bsl-button-textColor: var(--bsl-textColor);
 
   --bsl-input-backgroundColor: var(--bsl-color-neutral-100);
   --bsl-input-borderColor: var(--bsl-color-neutral-300);
-  --bsl-input-textColor: var(--textColor);
+  --bsl-input-textColor: var(--bsl-textColor);
   --bsl-input-textColor-placeholder: var(--bsl-color-neutral-400);
 
   --bsl-checkbox-backgroundColor: var(--bsl-color-neutral-100);
   --bsl-checkbox-borderColor: var(--bsl-color-neutral-300);
   --bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-400);
-  --bsl-checkbox-backgroundColor-checked: var(--bsl-color-neutral-950);
-  --bsl-checkbox-backgroundColor-checked-hover: var(--bsl-color-neutral-900);
-  --bsl-checkbox-iconColor: var(--bsl-color-neutral-200);
+  --bsl-checkbox-textColor: var(--bsl-textColor);
 
   --bsl-list-box-backgroundColor: var(--bsl-color-neutral-50);
   --bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-200);
