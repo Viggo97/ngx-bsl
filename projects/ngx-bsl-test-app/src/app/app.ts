@@ -1,9 +1,8 @@
 import { Component, signal } from '@angular/core';
-import {NgxBslTest} from '@ngx-bsl-lib';
 
 @Component({
     selector: 'ngx-bsl-test-app-root',
-    imports: [NgxBslTest],
+    imports: [],
     templateUrl: './app.html',
     styleUrl: './app.scss',
 })
