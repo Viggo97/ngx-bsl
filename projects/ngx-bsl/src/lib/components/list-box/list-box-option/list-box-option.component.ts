@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, HostListener, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { IdGenerator } from '../../../utils/id-generator';
 import { IconCheckComponent } from '../../icons/icon-check.component';
 
@@ -9,9 +9,7 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
     ],
     template: `
         <ng-content></ng-content>
-        @if (showCheck()) {
-            <ngx-bsl-icon-check></ngx-bsl-icon-check>
-        }
+        <ngx-bsl-icon-check></ngx-bsl-icon-check>
     `,
     styleUrl: './list-box-option.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,8 +21,6 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
 export class ListBoxOptionComponent<TOption> {
     value = input.required<TOption>();
     id = input.required<string>();
-    showCheck = input(true);
-    selectOption = output<TOption>();
 
     private optionIdGenerator = inject(IdGenerator);
 
@@ -32,9 +28,4 @@ export class ListBoxOptionComponent<TOption> {
         const id = this.optionIdGenerator.nextId();
         return `${this.id()}-${id}`;
     });
-
-    @HostListener('click')
-    onSelectOption(): void {
-        this.selectOption.emit(this.value());
-    }
 }
