@@ -47,7 +47,7 @@
       },
       "root": "projects/ngx-bsl-test-app",
       "sourceRoot": "projects/ngx-bsl-test-app/src",
-      "prefix": "ngx-bsa-test-app",
+      "prefix": "ngl-bsa-test-app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
