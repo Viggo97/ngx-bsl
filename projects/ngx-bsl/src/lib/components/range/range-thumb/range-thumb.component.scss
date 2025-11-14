@@ -1,0 +1,17 @@
+$thumb-size: .75rem;
+
+:host {
+    position: absolute;
+    width: $thumb-size;
+    height: $thumb-size;
+    border-radius: calc($thumb-size / 2);
+    background-color: var(--bsl-range-thumb-backgroundColor);
+    cursor: pointer;
+    touch-action: none;
+
+    &.disabled {
+        opacity: .65;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,33 @@
+<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
+<div class="rail"
+     [class.disabled]="disabled()"
+     (click)="onRailClick($event)">
+</div>
+
+<div class="tracker"
+     [class.disabled]="disabled()"
+     [style.left]="trackerLeft()"
+     [style.right]="trackerRight()">
+</div>
+
+<ngx-bsl-range-thumb
+    #thumbFrom
+    [tabindex]="disabled() ? -1 : 0"
+    [class.disabled]="disabled()"
+    [style.left]="thumbFromPosition() + 'px'"
+    [style.z-index]="overlappingThumb() === 'from' ? 1 : 0"
+    [ratio]="this.ratio()"
+    (focus)="overlappingThumb.set(Thumb.FROM)"
+    (positionChanged)="onPositionChangedThumbFrom($event)">
+</ngx-bsl-range-thumb>
+
+<ngx-bsl-range-thumb
+    #thumbTo
+    [tabindex]="disabled() ? -1 : 0"
+    [class.disabled]="disabled()"
+    [style.left]="thumbToPosition() + 'px'"
+    [style.z-index]="overlappingThumb() === 'to' ? 1 : 0"
+    [ratio]="this.ratio()"
+    (focus)="overlappingThumb.set(Thumb.TO)"
+    (positionChanged)="onPositionChangedThumbTo($event)">
+</ngx-bsl-range-thumb>

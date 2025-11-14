@@ -22,3 +22,5 @@ export {IconSunComponent} from './lib/components/icons/icon-sun.component';
 export {IconXMarkComponent} from './lib/components/icons/icon-x-mark.component';
 
 export {SelectComponent} from './lib/components/select/select.component';
+
+export {RangeComponent} from './lib/components/range/range.component';
