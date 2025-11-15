@@ -12,6 +12,13 @@
 
 <ngx-bsl-range-thumb
     #thumbFrom
+    role="slider"
+    [attr.aria-valuemin]="min()"
+    [attr.aria-valuemax]="value().to"
+    [attr.aria-valuenow]="value().from"
+    [attr.aria-valuetext]="value().from + ' - ' + value().to"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
     [tabindex]="disabled() ? -1 : 0"
     [class.disabled]="disabled()"
     [style.left]="thumbFromPosition() + 'px'"
@@ -23,6 +30,13 @@
 
 <ngx-bsl-range-thumb
     #thumbTo
+    role="slider"
+    [attr.aria-valuemin]="value().from"
+    [attr.aria-valuemax]="max()"
+    [attr.aria-valuenow]="value().to"
+    [attr.aria-valuetext]="value().from + ' - ' + value().to"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
     [tabindex]="disabled() ? -1 : 0"
     [class.disabled]="disabled()"
     [style.left]="thumbToPosition() + 'px'"

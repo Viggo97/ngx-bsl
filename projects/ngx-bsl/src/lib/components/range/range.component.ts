@@ -33,6 +33,10 @@ enum Thumb {
             useExisting: RangeComponent,
         },
     ],
+    host: {
+        '[attr.aria-label]': 'null',
+        '[attr.aria-labelledby]': 'null',
+    },
 })
 export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
     private elementRef = inject(ElementRef<HTMLElement>) as ElementRef<HTMLElement>;
@@ -41,6 +45,8 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
     max = input(5);
     step = input(1);
     value = model(new Range(0, 5));
+    ariaLabel = input<string | null>(null, {alias: 'aria-label'});
+    ariaLabelledBy = input<string | null>(null, {alias: 'aria-labelledby'});
 
     protected thumbFromRef = viewChild.required<RangeThumbComponent, ElementRef<HTMLElement>>('thumbFrom',
         {read: ElementRef<HTMLElement>});
