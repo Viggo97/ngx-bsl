@@ -1,0 +1,46 @@
+<button
+    type="button"
+    class="button-icon"
+    [attr.aria-label]="firstPageAriaLabel()"
+    [disabled]="disabled() || page() === 1"
+    (click)="onFirstPage($any($event))">
+    <ngx-bsl-icon-arrow-left-double></ngx-bsl-icon-arrow-left-double>
+</button>
+
+<button
+    type="button"
+    class="button-icon"
+    [attr.aria-label]="previousPageAriaLabel()"
+    [disabled]="disabled() || page() === 1"
+    (click)="onPreviousPage($any($event))">
+    <ngx-bsl-icon-arrow-left></ngx-bsl-icon-arrow-left>
+</button>
+
+<input
+    type="number"
+    [attr.aria-label]="selectPageAriaLabel()"
+    [attr.aria-labelledby]="selectPageAriaLabelledBy()"
+    [disabled]="disabled()"
+    [min]="1"
+    [max]="pages()"
+    [value]="page()"
+    (blur)="onInputBlur($any($event.target).valueAsNumber)"
+    (keydown.enter)="onInputEnter()">
+
+<button
+    type="button"
+    class="button-icon"
+    [attr.aria-label]="nextPageAriaLabel()"
+    [disabled]="disabled() || page() === pages()"
+    (click)="onNextPage($any($event))">
+    <ngx-bsl-icon-arrow-right></ngx-bsl-icon-arrow-right>
+</button>
+
+<button
+    type="button"
+    class="button-icon"
+    [attr.aria-label]="lastPageAriaLabel()"
+    [disabled]="disabled() || page() === pages()"
+    (click)="onLastPage($any($event))">
+    <ngx-bsl-icon-arrow-right-double></ngx-bsl-icon-arrow-right-double>
+</button>

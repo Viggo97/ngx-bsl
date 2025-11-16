@@ -21,6 +21,9 @@ export {IconMoonComponent} from './lib/components/icons/icon-moon.component';
 export {IconSunComponent} from './lib/components/icons/icon-sun.component';
 export {IconXMarkComponent} from './lib/components/icons/icon-x-mark.component';
 
-export {SelectComponent} from './lib/components/select/select.component';
+export {PaginationComponent} from './lib/components/pagination/pagination.component';
 
 export {RangeComponent} from './lib/components/range/range.component';
+
+export {SelectComponent} from './lib/components/select/select.component';
+
