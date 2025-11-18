@@ -86,6 +86,7 @@ export default defineConfig(
           'style': 'kebab-case',
         },
       ],
+      '@angular-eslint/no-input-rename': 'off'
     },
   },
   {
