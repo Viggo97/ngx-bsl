@@ -11,7 +11,11 @@ import {RangeMoveDirection} from '../range-move-direction.enum';
 @Component({
     selector: 'ngx-bsl-range-thumb',
     imports: [],
-    template: '',
+    template: `
+        @if (showLabel()) {
+            <span class="thumb-label">{{value()}}</span>
+        }
+    `,
     styleUrl: './range-thumb.component.scss',
     host: {
         '(keydown.arrowLeft)': 'positionChanged.emit(RangeMoveDirection.BACKWARD)',
@@ -25,6 +29,8 @@ export class RangeThumbComponent implements OnDestroy {
     private elementRef = inject<ElementRef<HTMLElement>>(ElementRef<HTMLElement>);
 
     ratio = input(0);
+    value = input(0);
+    showLabel = input(false);
 
     positionChanged = output<RangeMoveDirection>();
 

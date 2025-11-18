@@ -9,6 +9,14 @@ $thumb-size: .75rem;
     cursor: pointer;
     touch-action: none;
 
+    .thumb-label {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        font: var(--bsl-font-sm);
+    }
+
     &.disabled {
         opacity: .65;
         cursor: not-allowed;

@@ -47,6 +47,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
     value = model(new Range(0, 5));
     ariaLabel = input<string | null>(null, {alias: 'aria-label'});
     ariaLabelledBy = input<string | null>(null, {alias: 'aria-labelledby'});
+    showThumbLabels = input(false);
 
     protected thumbFromRef = viewChild.required<RangeThumbComponent, ElementRef<HTMLElement>>('thumbFrom',
         {read: ElementRef<HTMLElement>});

@@ -1,47 +1,58 @@
-<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
-<div class="rail"
-     [class.disabled]="disabled()"
-     (click)="onRailClick($event)">
+<div class="range">
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
+    <div class="rail"
+         [class.disabled]="disabled()"
+         (click)="onRailClick($event)">
+    </div>
+
+    <div class="tracker"
+         [class.disabled]="disabled()"
+         [style.left]="trackerLeft()"
+         [style.right]="trackerRight()">
+    </div>
+
+    <ngx-bsl-range-thumb
+        #thumbFrom
+        role="slider"
+        [attr.aria-valuemin]="min()"
+        [attr.aria-valuemax]="value().to"
+        [attr.aria-valuenow]="value().from"
+        [attr.aria-valuetext]="value().from + ' - ' + value().to"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [tabindex]="disabled() ? -1 : 0"
+        [class.disabled]="disabled()"
+        [style.left]="thumbFromPosition() + 'px'"
+        [style.z-index]="overlappingThumb() === 'from' ? 1 : 0"
+        [value]="value().from"
+        [ratio]="this.ratio()"
+        [showLabel]="showThumbLabels()"
+        (focus)="overlappingThumb.set(Thumb.FROM)"
+        (positionChanged)="onPositionChangedThumbFrom($event)">
+    </ngx-bsl-range-thumb>
+
+    <ngx-bsl-range-thumb
+        #thumbTo
+        role="slider"
+        [attr.aria-valuemin]="value().from"
+        [attr.aria-valuemax]="max()"
+        [attr.aria-valuenow]="value().to"
+        [attr.aria-valuetext]="value().from + ' - ' + value().to"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [tabindex]="disabled() ? -1 : 0"
+        [class.disabled]="disabled()"
+        [style.left]="thumbToPosition() + 'px'"
+        [style.z-index]="overlappingThumb() === 'to' ? 1 : 0"
+        [value]="value().to"
+        [ratio]="this.ratio()"
+        [showLabel]="showThumbLabels()"
+        (focus)="overlappingThumb.set(Thumb.TO)"
+        (positionChanged)="onPositionChangedThumbTo($event)">
+    </ngx-bsl-range-thumb>
 </div>
 
-<div class="tracker"
-     [class.disabled]="disabled()"
-     [style.left]="trackerLeft()"
-     [style.right]="trackerRight()">
+<div class="limits">
+    <span>{{ min() }}</span>
+    <span>{{ max() }}</span>
 </div>
-
-<ngx-bsl-range-thumb
-    #thumbFrom
-    role="slider"
-    [attr.aria-valuemin]="min()"
-    [attr.aria-valuemax]="value().to"
-    [attr.aria-valuenow]="value().from"
-    [attr.aria-valuetext]="value().from + ' - ' + value().to"
-    [attr.aria-label]="ariaLabel()"
-    [attr.aria-labelledby]="ariaLabelledBy()"
-    [tabindex]="disabled() ? -1 : 0"
-    [class.disabled]="disabled()"
-    [style.left]="thumbFromPosition() + 'px'"
-    [style.z-index]="overlappingThumb() === 'from' ? 1 : 0"
-    [ratio]="this.ratio()"
-    (focus)="overlappingThumb.set(Thumb.FROM)"
-    (positionChanged)="onPositionChangedThumbFrom($event)">
-</ngx-bsl-range-thumb>
-
-<ngx-bsl-range-thumb
-    #thumbTo
-    role="slider"
-    [attr.aria-valuemin]="value().from"
-    [attr.aria-valuemax]="max()"
-    [attr.aria-valuenow]="value().to"
-    [attr.aria-valuetext]="value().from + ' - ' + value().to"
-    [attr.aria-label]="ariaLabel()"
-    [attr.aria-labelledby]="ariaLabelledBy()"
-    [tabindex]="disabled() ? -1 : 0"
-    [class.disabled]="disabled()"
-    [style.left]="thumbToPosition() + 'px'"
-    [style.z-index]="overlappingThumb() === 'to' ? 1 : 0"
-    [ratio]="this.ratio()"
-    (focus)="overlappingThumb.set(Thumb.TO)"
-    (positionChanged)="onPositionChangedThumbTo($event)">
-</ngx-bsl-range-thumb>
