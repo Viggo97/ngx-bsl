@@ -27,3 +27,5 @@ export {RangeComponent} from './lib/components/range/range.component';
 
 export {SelectComponent} from './lib/components/select/select.component';
 
+export {TooltipDirective} from './lib/directives/tooltip/tooltip.directive';
+
