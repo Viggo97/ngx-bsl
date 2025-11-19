@@ -1,0 +1,12 @@
+services:
+  ngx-bsl-dev:
+    build:
+      context: .
+    image: ngx-bsl
+    ports:
+      - "4200:4200"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
