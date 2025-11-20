@@ -10,7 +10,7 @@ import {Component,
     OnInit,
     ChangeDetectionStrategy} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IdGenerator } from '../../utils/id-generator';
+import { IdGenerator } from '../utils/id-generator';
 import { ListBoxOptionComponent } from './list-box-option/list-box-option.component';
 
 @Component({

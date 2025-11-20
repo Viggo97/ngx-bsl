@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { IdGenerator } from '../../../utils/id-generator';
+import { IdGenerator } from '../../utils/id-generator';
 import { IconCheckComponent } from '../../icons/icon-check.component';
 
 @Component({

@@ -2,7 +2,7 @@ import {Component, ElementRef, inject, input, model, signal, OnInit, computed, v
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RangeThumbComponent} from './range-thumb/range-thumb.component';
 import {RangeMoveDirection} from './range-move-direction.enum';
-import {getDigitsNumber, round} from '../../utils/number.util';
+import {getDigitsNumber, round} from '../utils/number.util';
 
 class Range {
     from: number;
