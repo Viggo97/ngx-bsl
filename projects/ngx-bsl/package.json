@@ -1,6 +1,11 @@
 {
   "name": "ngx-bsl",
   "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Viggo97/ngx-bsl.git"
+  },
+  "homepage": "https://github.com/Viggo97/ngx-bsl.git#readme",
   "peerDependencies": {
     "@angular/animations": "^20.3.0",
     "@angular/common": "^20.3.0",
