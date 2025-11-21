@@ -12,7 +12,7 @@ export default defineConfig(
     languageOptions: {
       parserOptions: {
         tsconfigRootDir: import.meta.dirname,
-        projectService: true
+        projectService: true,
       },
     },
     processor: angular.processInlineTemplates,
@@ -28,7 +28,7 @@ export default defineConfig(
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
-          project: "projects"
+          project: 'projects',
         },
       },
     },
@@ -38,11 +38,21 @@ export default defineConfig(
     },
     rules: {
       'semi': 'error',
+      'prefer-const': 'error',
       'import/first': 'error',
       'import/newline-after-import': 'error',
       'import/no-cycle': ['error', {'maxDepth': '∞'}],
       'no-duplicate-imports': 'error',
       'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          'vars': 'all',
+          'varsIgnorePattern': '^_',
+          'args': 'after-used',
+          'argsIgnorePattern': '^_',
+        },
+      ],
       'max-len': [
         'error',
         120,
@@ -85,7 +95,7 @@ export default defineConfig(
           'style': 'kebab-case',
         },
       ],
-      '@angular-eslint/no-input-rename': 'off'
+      '@angular-eslint/no-input-rename': 'off',
     },
   },
   {
@@ -95,5 +105,5 @@ export default defineConfig(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-  }
+  },
 );
