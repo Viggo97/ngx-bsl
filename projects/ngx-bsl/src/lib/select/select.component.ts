@@ -1,10 +1,18 @@
-import { Component, input, signal, viewChild, forwardRef, computed } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { IconChevronDownComponent } from '../icons/icon-chevron-down.component';
-import { ListBoxComponent } from '../list-box/list-box.component';
-import { ListBoxOptionComponent } from '../list-box/list-box-option/list-box-option.component';
-import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/list-box-option-value-converter.pipe';
+import {ChangeDetectionStrategy,
+    Component,
+    computed,
+    forwardRef,
+    input,
+    model,
+    signal,
+    viewChild,
+    ViewEncapsulation} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {CdkConnectedOverlay, CdkOverlayOrigin} from '@angular/cdk/overlay';
+import {IconChevronDownComponent} from '../icons/icon-chevron-down.component';
+import {ListBoxComponent} from '../list-box/list-box.component';
+import {ListBoxOptionComponent} from '../list-box/list-box-option/list-box-option.component';
+import {ListBoxOptionValueConverterPipe} from '../list-box/list-box-option/list-box-option-value-converter.pipe';
 
 @Component({
     selector: 'ngx-bsl-select',
@@ -25,6 +33,8 @@ import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/lis
             multi: true,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
 export class SelectComponent<TOption> implements ControlValueAccessor {
     id = input.required<string>();
@@ -42,7 +52,7 @@ export class SelectComponent<TOption> implements ControlValueAccessor {
 
     onChange = (_value: TOption) => {};
     onTouch = () => {};
-    protected value: TOption | null = null;
+    value = model<TOption | null>(null);
 
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
@@ -66,8 +76,8 @@ export class SelectComponent<TOption> implements ControlValueAccessor {
     }
 
     protected onSelectOption(value: TOption): void {
-        this.value = value;
-        this.onChange(this.value);
+        this.value.set(value);
+        this.onChange(value);
         this.hideListBox();
     }
 
@@ -95,6 +105,6 @@ export class SelectComponent<TOption> implements ControlValueAccessor {
     }
 
     writeValue(value: TOption): void {
-        this.value = value;
+        this.value.set(value);
     }
 }

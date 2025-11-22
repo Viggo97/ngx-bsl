@@ -2,12 +2,14 @@
     type="button"
     role="combobox"
     #selectButton
+    class="bsl-select-button"
     cdkOverlayOrigin
     [attr.aria-expanded]="open()"
     [attr.aria-controls]="'list-box-' + id()"
     [attr.aria-label]="ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-activedescendant]="ariaActiveDescendant()"
+    [class.button-icon]="iconMode()"
     (click)="onClick()"
     (keydown.enter)="onKeydown($any($event))"
     (keydown.space)="onKeydown($any($event))"
@@ -17,7 +19,7 @@
     @if (iconMode()) {
         <ng-content select="[data-custom-icon]"></ng-content>
     } @else {
-        <span>{{ value ? (value | listBoxOptionValueConverter : bindLabel()) : placeholder() }}</span>
+        <span>{{ value() ? (value() | listBoxOptionValueConverter : bindLabel()) : placeholder() }}</span>
 
         @if (customIcon()) {
             <ng-content select="[data-custom-icon]"></ng-content>
@@ -33,7 +35,7 @@
     [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
     (overlayOutsideClick)="hideListBox()">
     <ngx-bsl-list-box
-        [initialValue]="value"
+        [initialValue]="value()"
         [initialFocusedOptionIndex]="initialFocusedOptionIndex()"
         [comparisonField]="comparisonField()"
         [id]="'list-box-' + id()"
