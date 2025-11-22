@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 
 /*
     eslint-disable max-len,
@@ -13,6 +13,8 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
       </svg>
   `,
     styleUrl: './icon.scss',
+    host: {'[class.bsl-icon]': 'true'},
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
 export class IconArrowRightDoubleComponent {}
