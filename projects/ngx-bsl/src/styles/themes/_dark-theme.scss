@@ -1,34 +1,34 @@
 @mixin dark-theme {
-  --bsl-backgroundColor: var(--bsl-color-neutral-950);
-  --bsl-backgroundColor-muted: var(--bsl-color-neutral-900);
-  --bsl-backgroundColor-emphasis: var(--bsl-color-neutral-800);
+    --bsl-backgroundColor: var(--bsl-color-neutral-950);
+    --bsl-backgroundColor-muted: var(--bsl-color-neutral-900);
+    --bsl-backgroundColor-emphasis: var(--bsl-color-neutral-800);
 
-  --bsl-textColor: var(--bsl-color-neutral-200);
-  --bsl-textColor-muted: var(--bsl-color-neutral-300);
+    --bsl-textColor: var(--bsl-color-neutral-200);
+    --bsl-textColor-muted: var(--bsl-color-neutral-300);
 
-  --bsl-borderColor: var(--bsl-color-neutral-800);
-  --bsl-borderColor-muted: var(--bsl-color-neutral-700);
-  --bsl-borderColor-emphasis: var(--bsl-color-neutral-600);
+    --bsl-borderColor: var(--bsl-color-neutral-800);
+    --bsl-borderColor-muted: var(--bsl-color-neutral-700);
+    --bsl-borderColor-emphasis: var(--bsl-color-neutral-600);
 
-  --bsl-button-backgroundColor: var(--bsl-color-neutral-950);
-  --bsl-button-backgroundColor-hover: var(--bsl-color-neutral-900);
-  --bsl-button-backgroundColor-active: var(--bsl-color-neutral-800);
-  --bsl-button-borderColor: var(--bsl-color-neutral-700);
-  --bsl-button-textColor: var(--bsl-textColor);
+    --bsl-button-backgroundColor: var(--bsl-color-neutral-950);
+    --bsl-button-backgroundColor-hover: var(--bsl-color-neutral-900);
+    --bsl-button-backgroundColor-active: var(--bsl-color-neutral-800);
+    --bsl-button-borderColor: var(--bsl-color-neutral-700);
+    --bsl-button-textColor: var(--bsl-textColor);
 
-  --bsl-input-backgroundColor: var(--bsl-color-neutral-900);
-  --bsl-input-borderColor: var(--bsl-color-neutral-700);
-  --bsl-input-textColor: var(--bsl-textColor);
-  --bsl-input-textColor-placeholder: var(--bsl-color-neutral-400);
+    --bsl-input-backgroundColor: var(--bsl-color-neutral-900);
+    --bsl-input-borderColor: var(--bsl-color-neutral-700);
+    --bsl-input-textColor: var(--bsl-textColor);
+    --bsl-input-textColor-placeholder: var(--bsl-color-neutral-400);
 
-  --bsl-checkbox-backgroundColor: var(--bsl-color-neutral-900);
-  --bsl-checkbox-borderColor: var(--bsl-color-neutral-800);
-  --bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-700);
-  --bsl-checkbox-textColor: var(--bsl-textColor);
+    --bsl-checkbox-backgroundColor: var(--bsl-color-neutral-900);
+    --bsl-checkbox-borderColor: var(--bsl-color-neutral-800);
+    --bsl-checkbox-borderColor-hover: var(--bsl-color-neutral-700);
+    --bsl-checkbox-textColor: var(--bsl-textColor);
 
-  --bsl-list-box-backgroundColor: var(--bsl-color-neutral-950);
-  --bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-800);
-  --bsl-list-box-borderColor: var(--bsl-color-neutral-700);
+    --bsl-list-box-backgroundColor: var(--bsl-color-neutral-950);
+    --bsl-list-box-backgroundColor-hover: var(--bsl-color-neutral-800);
+    --bsl-list-box-borderColor: var(--bsl-color-neutral-700);
 
     --bsl-range-rail-backgroundColor: var(--bsl-color-neutral-800);
     --bsl-range-tracker-backgroundColor: var(--bsl-color-neutral-600);
@@ -36,5 +36,4 @@
 
     --bsl-tooltip-backgroundColor: var(--bsl-color-neutral-200);
     --bsl-tooltip-textColor: var(--bsl-color-neutral-800);
-
 }
