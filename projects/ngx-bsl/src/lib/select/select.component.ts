@@ -52,7 +52,7 @@ export class SelectComponent<TOption> implements ControlValueAccessor {
 
     onChange = (_value: TOption) => {};
     onTouch = () => {};
-    value = model<TOption | null>(null);
+    value = model<TOption>();
 
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
