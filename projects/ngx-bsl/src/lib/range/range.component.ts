@@ -71,7 +71,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
     protected readonly Thumb = Thumb;
     private resizeObserver!: ResizeObserver;
 
-    onChange = (_value: number) => {
+    onChange = (_value: Range) => {
     };
     onTouch = () => {
     };
@@ -108,6 +108,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
         if (range) {
             this.value.update(() => range);
+            this.onChange(this.value());
         }
     }
 
@@ -155,6 +156,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
         const diff = direction === RangeMoveDirection.BACKWARD ? -this._step() : this._step();
         const newFrom = this.value().from + diff;
         this.value.update((value) => new Range(round(newFrom, this.stepDigits()), value.to));
+        this.onChange(this.value());
         this.computeFromThumbPosition();
         this.overlappingThumb.set(Thumb.FROM);
     }
@@ -171,6 +173,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
         const diff = direction === RangeMoveDirection.BACKWARD ? -this._step() : this._step();
         const newTo = this.value().to + diff;
         this.value.update((value) => new Range(value.from, round(newTo, this.stepDigits())));
+        this.onChange(this.value());
         this.computeToThumbPosition();
         this.overlappingThumb.set(Thumb.TO);
     }
@@ -201,9 +204,11 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
         const thumb = this.selectThumbToMove(pointerPosition);
         if (thumb === Thumb.FROM) {
             this.value.update((value) => new Range(newValue, value.to));
+            this.onChange(this.value());
             this.computeFromThumbPosition();
         } else {
             this.value.update((value) => new Range(value.from, newValue));
+            this.onChange(this.value());
             this.computeToThumbPosition();
         }
     }
@@ -238,7 +243,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
         return Thumb.TO;
     }
 
-    registerOnChange(onChange: (value: number) => void): void {
+    registerOnChange(onChange: (value: Range) => void): void {
         this.onChange = onChange;
     }
 
@@ -246,7 +251,7 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
         this.onTouch = onTouch;
     }
 
-    writeValue(value: { from: number, to: number }): void {
+    writeValue(value: Range): void {
         this.value.set(value);
     }
 
