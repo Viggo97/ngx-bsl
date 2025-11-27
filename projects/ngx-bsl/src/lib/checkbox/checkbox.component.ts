@@ -1,6 +1,6 @@
-import { Component, HostListener, input, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IconCheckComponent } from '../icons/icon-check.component';
+import {Component, HostListener, input, signal, ViewEncapsulation} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {IconCheckComponent} from '../icons/icon-check.component';
 
 @Component({
     selector: 'ngx-bsl-checkbox',
@@ -16,6 +16,7 @@ import { IconCheckComponent } from '../icons/icon-check.component';
             useExisting: CheckboxComponent,
         },
     ],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent implements ControlValueAccessor {
     id = input.required<string>();
