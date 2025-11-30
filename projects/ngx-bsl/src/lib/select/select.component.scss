@@ -1,5 +1,9 @@
 @use '../../styles/mixins';
 
+ngx-bsl-select {
+    display: block;
+}
+
 .bsl-select-button {
     width: 100%;
     min-height: 2.25rem;
