@@ -253,6 +253,8 @@ export class RangeComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
     writeValue(value: Range): void {
         this.value.set(value);
+        this.computeFromThumbPosition();
+        this.computeToThumbPosition();
     }
 
     setDisabledState(disabled: boolean): void {
