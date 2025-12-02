@@ -1,17 +1,18 @@
-import {Component,
-    input,
-    HostListener,
-    forwardRef,
+import {AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
     contentChildren,
     ElementRef,
-    output,
-    AfterContentInit,
-    signal,
+    forwardRef,
+    HostListener,
+    input,
     OnInit,
-    ChangeDetectionStrategy} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IdGenerator } from '../utils/id-generator';
-import { ListBoxOptionComponent } from './list-box-option/list-box-option.component';
+    output,
+    signal,
+    ViewEncapsulation} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {IdGenerator} from '../utils/id-generator';
+import {ListBoxOptionComponent} from './list-box-option/list-box-option.component';
 
 @Component({
     selector: 'ngx-bsl-list-box',
@@ -19,6 +20,7 @@ import { ListBoxOptionComponent } from './list-box-option/list-box-option.compon
     template: '<ng-content></ng-content>',
     styleUrl: './list-box.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [
         IdGenerator,
         {

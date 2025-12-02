@@ -1,4 +1,4 @@
-:host {
+ngx-bsl-list-box {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -7,4 +7,12 @@
     border-radius: 6px;
     background-color: var(--bsl-list-box-backgroundColor);
     overflow: hidden;
+
+    .list-box-no-options-message {
+        padding: 4px;
+        display: flex;
+        justify-content: center;
+        font: var(--bsl-font-sm);
+        color: var(--bsl-textColor);
+    }
 }
