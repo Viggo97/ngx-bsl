@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { IdGenerator } from '../../utils/id-generator';
-import { IconCheckComponent } from '../../icons/icon-check.component';
+import {ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation} from '@angular/core';
+import {IdGenerator} from '../../utils/id-generator';
+import {IconCheckComponent} from '../../icons/icon-check.component';
 
 @Component({
     selector: 'ngx-bsl-list-box-option',
@@ -13,6 +13,7 @@ import { IconCheckComponent } from '../../icons/icon-check.component';
     `,
     styleUrl: './list-box-option.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         'role': 'option',
         '[attr.id]': 'listBoxOptionId()',
