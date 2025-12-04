@@ -6,8 +6,7 @@ import {ChangeDetectionStrategy,
     output,
     signal,
     viewChild,
-    ViewEncapsulation,
-    OnInit} from '@angular/core';
+    ViewEncapsulation} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ListBoxComponent } from '../list-box/list-box.component';
@@ -37,7 +36,7 @@ import { GroupData } from './group-data.interface';
         },
     ],
 })
-export class ComboboxComponent<TOption> implements ControlValueAccessor, OnInit {
+export class ComboboxComponent<TOption> implements ControlValueAccessor {
     id = input.required<string>();
     options = input.required<TOption[]>();
     bindLabel = input<string>();
@@ -59,14 +58,13 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor, OnInit 
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
     protected initialFocusedOptionIndex = signal<number | null>(null);
-    optionsGroup = signal<GroupData<TOption>[] | null>(null);
-
-    ngOnInit(): void {
+    protected optionsGroup = computed(() => {
         const groupByKey = this.groupBy();
         if (groupByKey) {
-            this.groupDataBy(groupByKey, this.options() as Record<string, unknown>[]);
+            return this.groupDataBy(groupByKey, this.options() as Record<string, unknown>[]);
         }
-    }
+        return [];
+    });
 
     protected showListBox(): void {
         this.open.set(true);
@@ -120,7 +118,7 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor, OnInit 
         }
     }
 
-    private groupDataBy(field: string, data: Record<string, unknown>[]): void {
+    private groupDataBy(field: string, data: Record<string, unknown>[]): GroupData<TOption>[] {
         const groupsMap = data.reduce((map, value) => {
             const key = value[field] as string;
             if (!map.has(key)) {
@@ -130,8 +128,7 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor, OnInit 
             return map;
         }, new Map<string, Record<string, unknown>[]>);
 
-        const groupData = Array.from(groupsMap, ([group, data]) => ({ group, data })) as GroupData<TOption>[];
-        this.optionsGroup.set(groupData);
+        return Array.from(groupsMap, ([group, data]) => ({ group, data })) as GroupData<TOption>[];
     }
 
     registerOnChange(onChange: (value: TOption) => void): void {
