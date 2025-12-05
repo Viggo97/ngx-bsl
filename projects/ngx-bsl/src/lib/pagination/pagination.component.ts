@@ -1,4 +1,13 @@
-import {Component, computed, ElementRef, input, model, output, signal, viewChild} from '@angular/core';
+import {ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    input,
+    model,
+    output,
+    signal,
+    viewChild,
+    ViewEncapsulation} from '@angular/core';
 import {IconArrowLeftComponent} from '../icons/icon-arrow-left.component';
 import {IconArrowRightComponent} from '../icons/icon-arrow-right.component';
 import {IconArrowLeftDoubleComponent} from '../icons/icon-arrow-left-double.component';
@@ -14,6 +23,8 @@ import {IconArrowRightDoubleComponent} from '../icons/icon-arrow-right-double.co
     ],
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
     page = model(1);
