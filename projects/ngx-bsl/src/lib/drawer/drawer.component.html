@@ -1,7 +1,7 @@
 <div cdkTrapFocus
      cdkTrapFocusAutoCapture="true"
-     class="drawer-container">
-    <header>
+     class="ngx-bsl-drawer-container">
+    <header class="ngx-bsl-drawer-header">
         <button class="button-icon"
                 (click)="close()">
             <ngx-bsl-icon-x-mark></ngx-bsl-icon-x-mark>
@@ -10,7 +10,7 @@
             <h2 class="text-ellipsis">{{ title() }}</h2>
         }
     </header>
-    <div class="drawer-content">
+    <div class="ngx-bsl-drawer-content">
         <ng-content></ng-content>
     </div>
 </div>

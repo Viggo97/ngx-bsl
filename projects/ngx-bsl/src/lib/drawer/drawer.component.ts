@@ -14,7 +14,7 @@ import { IconXMarkComponent } from '../icons/icon-x-mark.component';
         'role': 'dialog',
         'aria-modal': 'true',
         '[attr.aria-label]': 'title()',
-        '[class.closed]': 'isClosed()',
+        '[class.ngx-bsl-drawer-closed]': 'isClosed()',
         '(transitionend)': 'onTransitionEnd($event)',
     },
 })

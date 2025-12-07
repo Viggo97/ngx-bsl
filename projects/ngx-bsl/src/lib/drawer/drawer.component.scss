@@ -1,37 +1,37 @@
 ngx-bsl-drawer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  max-height: 95vh;
-  height: 100%;
-  transform: translateY(0);
-  transition: transform 150ms cubic-bezier(0, 0, 0.2 , 1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 95vh;
+    height: 100%;
+    transform: translateY(0);
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
 
-  &.closed {
-    transform: translateY(100%);
-  }
+    &.ngx-bsl-drawer-closed {
+        transform: translateY(100%);
+    }
 }
 
-.drawer-container {
-  height: 100%;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bsl-backgroundColor);
-  border: 1px solid var(--bsl-borderColor-emphasis);
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+.ngx-bsl-drawer-container {
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bsl-backgroundColor);
+    border: 1px solid var(--bsl-borderColor-emphasis);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }
 
-header {
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row-reverse;
+ngx-bsl-drawer-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
 }
 
-.drawer-content {
-  overflow-y: auto;
-  height: 100%;
+.ngx-bsl-drawer-content {
+    overflow-y: auto;
+    height: 100%;
 }
