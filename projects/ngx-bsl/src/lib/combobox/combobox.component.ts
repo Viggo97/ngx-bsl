@@ -38,7 +38,7 @@ import { GroupData } from './group-data.interface';
 })
 export class ComboboxComponent<TOption extends Record<string, unknown> | string> implements ControlValueAccessor {
     id = input.required<string>();
-    options = input.required<TOption[] | string>();
+    options = input.required<TOption[] | string[]>();
     bindLabel = input<string>();
     groupBy = input<string>();
     comparisonField = input<string>();
