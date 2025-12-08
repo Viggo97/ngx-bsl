@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy,
     Component,
-    computed,
+    computed, effect,
     forwardRef,
     input,
     output,
@@ -36,35 +36,46 @@ import { GroupData } from './group-data.interface';
         },
     ],
 })
-export class ComboboxComponent<TOption> implements ControlValueAccessor {
+export class ComboboxComponent<TOption extends Record<string, unknown> | string> implements ControlValueAccessor {
     id = input.required<string>();
-    options = input.required<TOption[]>();
+    options = input.required<TOption[] | string>();
     bindLabel = input<string>();
+    groupBy = input<string>();
+    comparisonField = input<string>();
     placeholder = input<string>('');
     ariaLabel = input<string>();
     ariaLabelledBy = input<string>();
-    comparisonField = input<keyof TOption>();
-    groupBy = input<string>();
-    noOptionsMessage = input<string>();
 
     confirmSelection = output();
 
     private listBox = viewChild(ListBoxComponent);
 
-    onChange = (_value: TOption) => {};
+    onChange = (_value: string) => {};
     onTouch = () => {};
-    protected value: TOption | null = null;
 
+    protected value = signal<string>('');
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
     protected initialFocusedOptionIndex = signal<number | null>(null);
-    protected optionsGroup = computed(() => {
+    protected groupedOptions = computed(() => {
         const groupByKey = this.groupBy();
         if (groupByKey) {
             return this.groupDataBy(groupByKey, this.options() as Record<string, unknown>[]);
         }
         return [];
     });
+    private ignoreOptionsUpdate = false;
+
+    constructor() {
+        effect(() => {
+            if (!this.options().length || this.ignoreOptionsUpdate) {
+                this.ignoreOptionsUpdate = false;
+                this.hideListBox();
+            } else {
+                this.showListBox();
+            }
+        });
+    }
 
     protected showListBox(): void {
         this.open.set(true);
@@ -79,25 +90,39 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor {
         if (this.open()) {
             this.hideListBox();
         } else {
-            this.showListBox();
+            if (this.options().length) {
+                this.showListBox();
+            }
         }
     }
 
-    protected onSelectOption(value: TOption): void {
-        this.value = value;
-        this.onChange(this.value);
+    protected onSelectOption(value: TOption | string): void {
+        let valueToSet: string;
+        if (typeof value === 'string') {
+            valueToSet = value;
+        } else {
+            const comparisonField = this.comparisonField() as string;
+            if (comparisonField) {
+                if (typeof value[comparisonField] === 'string') {
+                    valueToSet = value[comparisonField];
+                } else {
+                    throw new Error('Type of property pointed by comparisonField must be a string.');
+                }
+            } else {
+                throw new Error('comparisonField is not provided.');
+            }
+        }
+
+        this.ignoreOptionsUpdate = true;
+        this.value.set(valueToSet);
+        this.onChange(this.value());
         this.hideListBox();
     }
 
     protected onInputChange(event: InputEvent) {
-        const value = (event.target as HTMLInputElement).value as TOption;
-
-        if (!this.open()) {
-            this.showListBox();
-        }
-
-        this.value = value;
-        this.onChange(this.value);
+        const value = (event.target as HTMLInputElement).value;
+        this.value.set(value);
+        this.onChange(this.value());
     }
 
     protected onKeydown(event: KeyboardEvent) {
@@ -105,9 +130,13 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor {
 
         if (!this.open()) {
             if (event.code === 'ArrowUp') {
+                if (!this.options().length)
+                    return;
                 this.initialFocusedOptionIndex.set(this.options().length - 1);
                 this.showListBox();
             } else if (event.code === 'ArrowDown') {
+                if (!this.options().length)
+                    return;
                 this.initialFocusedOptionIndex.set(0);
                 this.showListBox();
             } else if (event.code === 'Enter') {
@@ -131,7 +160,7 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor {
         return Array.from(groupsMap, ([group, data]) => ({ group, data })) as GroupData<TOption>[];
     }
 
-    registerOnChange(onChange: (value: TOption) => void): void {
+    registerOnChange(onChange: (value: string) => void): void {
         this.onChange = onChange;
     }
 
@@ -139,7 +168,7 @@ export class ComboboxComponent<TOption> implements ControlValueAccessor {
         this.onTouch = onTouch;
     }
 
-    writeValue(value: TOption): void {
-        this.value = value;
+    writeValue(value: string): void {
+        this.value.set(value);
     }
 }
