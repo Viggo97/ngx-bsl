@@ -1,5 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation} from '@angular/core';
-import {IdGenerator} from '../../utils/id-generator';
+import {ChangeDetectionStrategy, Component, input, ViewEncapsulation} from '@angular/core';
 import {IconCheckComponent} from '../../icons/icon-check.component';
 
 @Component({
@@ -16,17 +15,10 @@ import {IconCheckComponent} from '../../icons/icon-check.component';
     encapsulation: ViewEncapsulation.None,
     host: {
         'role': 'option',
-        '[attr.id]': 'listBoxOptionId()',
+        '[attr.id]': 'id()',
     },
 })
 export class ListBoxOptionComponent<TOption> {
     value = input.required<TOption>();
     id = input.required<string>();
-
-    private optionIdGenerator = inject(IdGenerator);
-
-    protected listBoxOptionId = computed(() => {
-        const id = this.optionIdGenerator.nextId();
-        return `${this.id()}-${id}`;
-    });
 }

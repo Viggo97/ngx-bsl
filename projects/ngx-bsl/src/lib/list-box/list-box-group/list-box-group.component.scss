@@ -1,6 +1,13 @@
-.group-title {
-  padding: .375rem .5rem;
-  font: var(--bsl-font-xs);
-  color: var(--bsl-textColor-muted);
-  font-weight: 500;
+ngx-bsl-list-box-group {
+    display: flex;
+    flex-direction: column;
+    font: var(--bsl-font-xs);
+    color: var(--bsl-textColor-muted);
+
+    span:first-child {
+        padding: .375rem .5rem;
+        font: var(--bsl-font-xs);
+        color: var(--bsl-textColor-muted);
+        font-weight: 500;
+    }
 }

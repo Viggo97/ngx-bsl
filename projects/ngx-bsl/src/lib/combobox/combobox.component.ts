@@ -1,29 +1,21 @@
 import {ChangeDetectionStrategy,
     Component,
-    computed, effect,
-    forwardRef,
+    computed,
+    forwardRef, inject,
     input,
     output,
     signal,
-    viewChild,
-    ViewEncapsulation} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ListBoxComponent } from '../list-box/list-box.component';
-import { ListBoxOptionComponent } from '../list-box/list-box-option/list-box-option.component';
-import { ListBoxGroupComponent } from '../list-box/list-box-group/list-box-group.component';
-import { ListBoxOptionValueConverterPipe } from '../list-box/list-box-option/list-box-option-value-converter.pipe';
-import { GroupData } from './group-data.interface';
+    ViewEncapsulation, OnInit, effect, DestroyRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {CdkConnectedOverlay, CdkOverlayOrigin} from '@angular/cdk/overlay';
+import {ListBoxDirective} from '../list-box/list-box.directive';
 
 @Component({
     selector: 'ngx-bsl-combobox',
     imports: [
         CdkOverlayOrigin,
         CdkConnectedOverlay,
-        ListBoxComponent,
-        ListBoxOptionComponent,
-        ListBoxGroupComponent,
-        ListBoxOptionValueConverterPipe,
     ],
     templateUrl: './combobox.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,45 +27,60 @@ import { GroupData } from './group-data.interface';
             multi: true,
         },
     ],
+    hostDirectives: [
+        {
+            directive: ListBoxDirective,
+            inputs: ['listBoxId', 'listBoxAriaLabel', 'listBoxAriaLabelledby', 'valueOptionEquality'],
+        },
+    ],
 })
-export class ComboboxComponent<TOption extends Record<string, unknown> | string> implements ControlValueAccessor {
+export class ComboboxComponent<TOption>
+implements ControlValueAccessor, OnInit {
+    protected listBox = inject(ListBoxDirective<TOption>);
+    private destroyRef = inject(DestroyRef);
+
     id = input.required<string>();
-    options = input.required<TOption[] | string[]>();
-    bindLabel = input<string>();
-    groupBy = input<string>();
-    comparisonField = input<string>();
     placeholder = input<string>('');
     ariaLabel = input<string>();
     ariaLabelledBy = input<string>();
+    valueOptionParse = input<(option: TOption) => string>((option) => option as string);
 
     confirmSelection = output();
-
-    private listBox = viewChild(ListBoxComponent);
 
     onChange = (_value: string) => {};
     onTouch = () => {};
 
-    protected value = signal<string>('');
+    value = signal<string>('');
     protected open = signal(false);
-    protected ariaActiveDescendant = computed<string | null>(() => this.listBox()?.ariaActiveDescendant() ?? null);
-    protected initialFocusedOptionIndex = signal<number | null>(null);
-    protected groupedOptions = computed(() => {
-        const groupByKey = this.groupBy();
-        if (groupByKey) {
-            return this.groupDataBy(groupByKey, this.options() as Record<string, unknown>[]);
-        }
-        return [];
-    });
-    private ignoreOptionsUpdate = false;
+    protected ariaActiveDescendant = computed<string | null>(() => this.listBox.ariaActiveDescendant() ?? null);
+    private optionSelecting = false;
+    private optionChangedBy: 'selection' | 'input' | null = null;
 
     constructor() {
         effect(() => {
-            if (!this.options().length || this.ignoreOptionsUpdate) {
-                this.ignoreOptionsUpdate = false;
-                this.hideListBox();
-            } else {
+            const hasOptions = this.listBox.listBoxOptions().length;
+            if (this.optionChangedBy === 'input' && hasOptions) {
                 this.showListBox();
+            } else if (this.optionChangedBy === 'selection') {
+                this.hideListBox();
             }
+            this.optionChangedBy = null;
+        });
+    }
+
+    ngOnInit(): void {
+        this.listBox.hasAriaSelected = false;
+        this.subscribeSelectOption();
+    }
+
+    private subscribeSelectOption(): void {
+        this.listBox.selectOption.pipe(
+            takeUntilDestroyed(this.destroyRef),
+        ).subscribe(option => {
+            this.optionChangedBy = 'selection';
+            this.value.set(this.valueOptionParse()(option));
+            this.hideListBox();
+            this.onChange(this.value());
         });
     }
 
@@ -82,7 +89,7 @@ export class ComboboxComponent<TOption extends Record<string, unknown> | string>
     }
 
     protected hideListBox(): void {
-        this.initialFocusedOptionIndex.set(null);
+        this.listBox.reset();
         this.open.set(false);
     }
 
@@ -90,38 +97,40 @@ export class ComboboxComponent<TOption extends Record<string, unknown> | string>
         if (this.open()) {
             this.hideListBox();
         } else {
-            if (this.options().length) {
+            if (this.listBox.listBoxOptions().length) {
                 this.showListBox();
             }
         }
     }
 
-    protected onSelectOption(value: TOption | string): void {
-        let valueToSet: string;
-        if (typeof value === 'string') {
-            valueToSet = value;
-        } else {
-            const comparisonField = this.comparisonField() as string;
-            if (comparisonField) {
-                if (typeof value[comparisonField] === 'string') {
-                    valueToSet = value[comparisonField];
-                } else {
-                    throw new Error('Type of property pointed by comparisonField must be a string.');
-                }
-            } else {
-                throw new Error('comparisonField is not provided.');
-            }
+    protected onBlur(): void {
+        if (!this.optionSelecting) {
+            this.hideListBox();
         }
+    }
 
-        this.ignoreOptionsUpdate = true;
-        this.value.set(valueToSet);
-        this.onChange(this.value());
-        this.hideListBox();
+    protected onListBoxPointerDown(event: PointerEvent): void {
+        event.preventDefault();
+        this.optionSelecting = true;
+    }
+
+    protected onListBoxClick(event: MouseEvent): void {
+        this.listBox.onClick(event);
+        this.optionSelecting = false;
     }
 
     protected onInputChange(event: InputEvent) {
         const value = (event.target as HTMLInputElement).value;
         this.value.set(value);
+        this.optionChangedBy = 'input';
+        if (this.listBox.listBoxOptions().length) {
+            if (this.open()) {
+                this.listBox.initSelectedOption(this.value());
+            }
+            else {
+                this.showListBox();
+            }
+        }
         this.onChange(this.value());
     }
 
@@ -130,34 +139,19 @@ export class ComboboxComponent<TOption extends Record<string, unknown> | string>
 
         if (!this.open()) {
             if (event.code === 'ArrowUp') {
-                if (!this.options().length)
-                    return;
-                this.initialFocusedOptionIndex.set(this.options().length - 1);
+                if (!this.listBox.listBoxOptions().length) return;
+                this.listBox.setVisualFocus(this.listBox.listBoxOptions().length - 1);
                 this.showListBox();
             } else if (event.code === 'ArrowDown') {
-                if (!this.options().length)
-                    return;
-                this.initialFocusedOptionIndex.set(0);
+                if (!this.listBox.listBoxOptions().length) return;
+                this.listBox.setVisualFocus(0);
                 this.showListBox();
             } else if (event.code === 'Enter') {
                 this.confirmSelection.emit();
             }
         } else {
-            this.listBox()?.onKeydown(event);
+            this.listBox.onKeydown(event);
         }
-    }
-
-    private groupDataBy(field: string, data: Record<string, unknown>[]): GroupData<TOption>[] {
-        const groupsMap = data.reduce((map, value) => {
-            const key = value[field] as string;
-            if (!map.has(key)) {
-                map.set(key, []);
-            }
-            map.get(key)?.push(value);
-            return map;
-        }, new Map<string, Record<string, unknown>[]>);
-
-        return Array.from(groupsMap, ([group, data]) => ({ group, data })) as GroupData<TOption>[];
     }
 
     registerOnChange(onChange: (value: string) => void): void {
