@@ -8,7 +8,7 @@ export class ListBoxDirective<TOption> {
     listBoxAriaLabel = input<string>();
     listBoxAriaLabelledby = input<string>();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    valueOptionEquality = input<(value: any, optionValue: any) => boolean>(
+    optionValueEquality = input<(value: any, optionValue: any) => boolean>(
         (value, optionValue) => value === optionValue,
     );
 
@@ -17,18 +17,19 @@ export class ListBoxDirective<TOption> {
     (ListBoxOptionComponent, { descendants: true, read: ElementRef<HTMLElement> });
 
     ariaActiveDescendant = signal<string | null>(null);
-    selectOption = new Subject<TOption>();
+    selectOption = new Subject<TOption | null>();
     hasAriaSelected = true;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initSelectedOption(value: any): void {
         const optionIndex = this.listBoxOptions()
-            .findIndex(option => this.valueOptionEquality()(value, option.value));
+            .findIndex(option => this.optionValueEquality()(value, option.value));
         if (optionIndex !== -1) {
             this.setSelectedAttribute(optionIndex);
             this.setVisualFocus(optionIndex);
         } else {
-            this.reset();
+            this.clearVisualFocus();
+            this.removeSelectedAttribute();
         }
     }
 
@@ -59,11 +60,6 @@ export class ListBoxDirective<TOption> {
         }
     }
 
-    reset(): void {
-        this.clearVisualFocus();
-        this.removeSelectedAttribute();
-    }
-
     private handleSelectionKeys(): void {
         const optionIndex = this.getVisuallyFocusedOptionRefIndex();
 
@@ -71,6 +67,8 @@ export class ListBoxDirective<TOption> {
             this.removeSelectedAttribute();
             this.setSelectedAttribute(optionIndex);
             this.selectOption.next(this.listBoxOptions()[optionIndex].value());
+        } else {
+            this.selectOption.next(null);
         }
     }
 
@@ -120,7 +118,7 @@ export class ListBoxDirective<TOption> {
         this.ariaActiveDescendant.set(null);
     }
 
-    private clearVisualFocus(): void {
+    clearVisualFocus(): void {
         const optionIndex = this.getVisuallyFocusedOptionRefIndex();
         if (optionIndex !== -1) {
             this.removeVisualFocus(optionIndex);
