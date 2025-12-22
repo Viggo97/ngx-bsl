@@ -1,11 +1,16 @@
 import {ChangeDetectionStrategy,
     Component,
     computed,
-    forwardRef, inject,
+    forwardRef,
+    inject,
     input,
     output,
     signal,
-    ViewEncapsulation, OnInit, effect, DestroyRef} from '@angular/core';
+    ViewEncapsulation,
+    OnInit,
+    effect,
+    DestroyRef,
+    model} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {CdkConnectedOverlay, CdkOverlayOrigin} from '@angular/cdk/overlay';
@@ -30,7 +35,7 @@ import {ListBoxDirective} from '../list-box/list-box.directive';
     hostDirectives: [
         {
             directive: ListBoxDirective,
-            inputs: ['listBoxId', 'listBoxAriaLabel', 'listBoxAriaLabelledby', 'valueOptionEquality'],
+            inputs: ['listBoxId', 'listBoxAriaLabel', 'listBoxAriaLabelledby', 'optionValueEquality'],
         },
     ],
 })
@@ -43,14 +48,15 @@ implements ControlValueAccessor, OnInit {
     placeholder = input<string>('');
     ariaLabel = input<string>();
     ariaLabelledBy = input<string>();
-    valueOptionParse = input<(option: TOption) => string>((option) => option as string);
+    optionValueParse = input<(option: TOption) => string>((option) => option as string);
 
     confirmSelection = output();
 
     onChange = (_value: string) => {};
     onTouch = () => {};
 
-    value = signal<string>('');
+    value = model<string>('');
+
     protected open = signal(false);
     protected ariaActiveDescendant = computed<string | null>(() => this.listBox.ariaActiveDescendant() ?? null);
     private optionSelecting = false;
@@ -77,10 +83,12 @@ implements ControlValueAccessor, OnInit {
         this.listBox.selectOption.pipe(
             takeUntilDestroyed(this.destroyRef),
         ).subscribe(option => {
-            this.optionChangedBy = 'selection';
-            this.value.set(this.valueOptionParse()(option));
+            if (option) {
+                this.optionChangedBy = 'selection';
+                this.value.set(this.optionValueParse()(option));
+                this.onChange(this.value());
+            }
             this.hideListBox();
-            this.onChange(this.value());
         });
     }
 
@@ -89,7 +97,7 @@ implements ControlValueAccessor, OnInit {
     }
 
     protected hideListBox(): void {
-        this.listBox.reset();
+        this.listBox.clearVisualFocus();
         this.open.set(false);
     }
 
