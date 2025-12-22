@@ -4,7 +4,7 @@ import {ListBoxOptionComponent} from './list-box-option/list-box-option.componen
 
 @Directive({selector: '[ngxBslListBox]'})
 export class ListBoxDirective<TOption> {
-    listBoxId = input.required<string>();
+    listBoxId = input<string>();
     listBoxAriaLabel = input<string>();
     listBoxAriaLabelledby = input<string>();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,7 +23,7 @@ export class ListBoxDirective<TOption> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initSelectedOption(value: any): void {
         const optionIndex = this.listBoxOptions()
-            .findIndex(option => this.optionValueEquality()(value, option.value));
+            .findIndex(option => this.optionValueEquality()(value, option.value()));
         if (optionIndex !== -1) {
             this.setSelectedAttribute(optionIndex);
             this.setVisualFocus(optionIndex);
