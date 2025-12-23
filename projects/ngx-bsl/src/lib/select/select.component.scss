@@ -4,13 +4,13 @@ ngx-bsl-select {
     display: block;
 }
 
-.bsl-select-button {
+.ngx-bsl-select-button {
     width: 100%;
-    min-height: 2.25rem;
     justify-content: space-between;
     gap: .5rem;
 
     span {
+        min-height: var(--bsl-line-height-sm);
         @include mixins.ellipsis;
     }
 }

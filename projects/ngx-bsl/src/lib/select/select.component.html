@@ -2,10 +2,10 @@
     type="button"
     role="combobox"
     #selectButton
-    class="bsl-select-button"
+    class="ngx-bsl-select-button"
     cdkOverlayOrigin
     [attr.aria-expanded]="open()"
-    [attr.aria-controls]="'list-box-' + id()"
+    [attr.aria-controls]="listBox.listBoxId() || id() + '-list-box'"
     [attr.aria-label]="ariaLabel()"
     [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-activedescendant]="ariaActiveDescendant()"
@@ -19,7 +19,7 @@
     @if (iconMode()) {
         <ng-content select="[data-custom-icon]"></ng-content>
     } @else {
-        <span>{{ value() ? (value() | listBoxOptionValueConverter : bindLabel()) : placeholder() }}</span>
+        <span>{{ displayValue() }}</span>
 
         @if (customIcon()) {
             <ng-content select="[data-custom-icon]"></ng-content>
@@ -34,21 +34,18 @@
     [cdkConnectedOverlayOpen]="open()"
     [cdkConnectedOverlayWidth]="dropdownWidth() || selectButton.offsetWidth"
     (overlayOutsideClick)="hideListBox()">
-    <ngx-bsl-list-box
-        [initialValue]="value()"
-        [initialFocusedOptionIndex]="initialFocusedOptionIndex()"
-        [comparisonField]="comparisonField()"
-        [id]="'list-box-' + id()"
-        [ariaLabel]="ariaLabel()"
-        [ariaLabelledby]="ariaLabelledBy()"
-        [exposeAriaActiveDescendant]="true"
-        (selectOption)="onSelectOption($event)">
-        @for (option of options(); track option) {
-            <ngx-bsl-list-box-option
-                [id]="'list-box-option-' + id()"
-                [value]="option">
-                <ng-container>{{ option | listBoxOptionValueConverter : bindLabel() }}</ng-container>
-            </ngx-bsl-list-box-option>
-        }
-    </ngx-bsl-list-box>
+    <!-- eslint-disable-next-line
+    @angular-eslint/template/interactive-supports-focus,
+    @angular-eslint/template/click-events-have-key-events -->
+    <div
+        role="listbox"
+        class="ngx-bsl-list-box"
+        [id]="listBox.listBoxId() || id() + '-list-box'"
+        [attr.aria-label]="listBox.listBoxAriaLabel()"
+        [attr.aria-labelledby]="listBox.listBoxAriaLabelledby()"
+        [attr.aria-activedescendant]="listBox.ariaActiveDescendant()"
+        (click)="onListBoxClick($event)"
+    >
+        <ng-content></ng-content>
+    </div>
 </ng-template>
