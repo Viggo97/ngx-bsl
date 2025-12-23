@@ -5,10 +5,8 @@ export {CheckboxComponent} from './lib/checkbox/checkbox.component';
 
 export {DrawerComponent} from './lib/drawer/drawer.component';
 
-export {ListBoxComponent} from './lib/list-box/list-box.component';
 export {ListBoxGroupComponent} from './lib/list-box/list-box-group/list-box-group.component';
 export {ListBoxOptionComponent} from './lib/list-box/list-box-option/list-box-option.component';
-export {ListBoxOptionValueConverterPipe} from './lib/list-box/list-box-option/list-box-option-value-converter.pipe';
 export {ListBoxSeparatorComponent} from './lib/list-box/list-box-separator/list-box-separator.component';
 
 export {IconCheckComponent} from './lib/icons/icon-check.component';
