@@ -10,6 +10,7 @@ export {ListBoxGroupComponent} from './lib/list-box/list-box-group/list-box-grou
 export {ListBoxOptionComponent} from './lib/list-box/list-box-option/list-box-option.component';
 export {ListBoxSeparatorComponent} from './lib/list-box/list-box-separator/list-box-separator.component';
 
+export {IconBurgerComponent} from './lib/icons/icon-burger.component';
 export {IconCheckComponent} from './lib/icons/icon-check.component';
 export {IconChevronDownComponent} from './lib/icons/icon-chevron-down.component';
 export {IconCompanyComponent} from './lib/icons/icon-company.component';
