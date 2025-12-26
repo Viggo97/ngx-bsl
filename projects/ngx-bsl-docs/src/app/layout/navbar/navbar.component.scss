@@ -1,0 +1,43 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--bsl-backgroundColor);
+}
+
+h3 {
+    color: var(--bsl-textColor);
+    font: var(--bsl-font-lg);
+    letter-spacing: 2px;
+}
+
+ul {
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: 1px solid var(--bsl-borderColor-muted);
+}
+
+li {
+    margin-left: -1px;
+    padding-left: 8px;
+    border-left: 1px solid var(--bsl-borderColor-muted);
+    text-decoration: none;
+    list-style: none;
+
+    &:hover {
+        border-left-color: var(--bsl-textColor);
+
+        a {
+            color: var(--bsl-textColor);
+        }
+    }
+}
+
+a {
+    font: var(--bsl-font-md);
+    color: var(--bsl-textColor-muted);
+    letter-spacing: 1px;
+    text-decoration: inherit;
+}

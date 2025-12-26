@@ -1,0 +1,10 @@
+<button
+    class="button-icon button-invisible"
+    aria-label="Switch theme"
+    (click)="onSwitchTheme()">
+    @if (theme() === Theme.DARK) {
+        <ngx-bsl-icon-moon></ngx-bsl-icon-moon>
+    } @else {
+        <ngx-bsl-icon-sun></ngx-bsl-icon-sun>
+    }
+</button>

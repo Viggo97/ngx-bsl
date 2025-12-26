@@ -1,0 +1,16 @@
+<header>
+    <ngx-bsl-docs-header
+        [showCompactMenuIcon]="compactMode()">
+    </ngx-bsl-docs-header>
+</header>
+@if (!compactMode()) {
+    <nav>
+        <ngx-bsl-docs-navbar></ngx-bsl-docs-navbar>
+    </nav>
+}
+<main>
+    <router-outlet></router-outlet>
+</main>
+<footer>
+    <ngx-bsl-docs-footer></ngx-bsl-docs-footer>
+</footer>

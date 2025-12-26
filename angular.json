@@ -35,31 +35,31 @@
         }
       }
     },
-    "ngx-bsl-test-app": {
+    "ngx-bsl-docs": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/ngx-bsl-test-app",
-      "sourceRoot": "projects/ngx-bsl-test-app/src",
-      "prefix": "ngl-bsa-test-app",
+      "root": "projects/ngx-bsl-docs",
+      "sourceRoot": "projects/ngx-bsl-docs/src",
+      "prefix": "ngx-bsl-docs",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "projects/ngx-bsl-test-app/src/main.ts",
-            "tsConfig": "projects/ngx-bsl-test-app/tsconfig.app.json",
+            "browser": "projects/ngx-bsl-docs/src/main.ts",
+            "tsConfig": "projects/ngx-bsl-docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/ngx-bsl-test-app/public"
+                "input": "projects/ngx-bsl-docs/public"
               }
             ],
             "styles": [
-              "projects/ngx-bsl-test-app/src/styles.scss"
+              "projects/ngx-bsl-docs/src/styles.scss"
             ]
           },
           "configurations": {
@@ -90,10 +90,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngx-bsl-test-app:build:production"
+              "buildTarget": "ngx-bsl-docs:build:production"
             },
             "development": {
-              "buildTarget": "ngx-bsl-test-app:build:development"
+              "buildTarget": "ngx-bsl-docs:build:development"
             }
           },
           "defaultConfiguration": "development"

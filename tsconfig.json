@@ -40,10 +40,10 @@
       "path": "./projects/ngx-bsl/tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngx-bsl-test-app/tsconfig.app.json"
+      "path": "./projects/ngx-bsl-docs/tsconfig.app.json"
     },
     {
-      "path": "./projects/ngx-bsl-test-app/tsconfig.spec.json"
+      "path": "./projects/ngx-bsl-docs/tsconfig.spec.json"
     }
   ]
 }

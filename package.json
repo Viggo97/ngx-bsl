@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build:lib": "ng build ngx-bsl",
+    "build:docs": "ng build ngx-bsl-docs",
     "watch": "ng build --watch --configuration development",
     "test:lib": "ng test ngx-bsl",
-    "test:test-app": "ng test ngx-bsl-test-app",
+    "test:docs": "ng test ngx-bsl-docs",
     "lint": "ng lint"
   },
   "dependencies": {

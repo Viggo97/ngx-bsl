@@ -1,0 +1,60 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    gap: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: .5rem;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    font: var(--bsl-font-xl);
+    font-weight: 700;
+    color: var(--bsl-textColor);
+    text-decoration: inherit;
+    border-radius: 6px;
+
+    &:visited {
+        color: var(--bsl-textColor);
+    }
+}
+
+a.link-button {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bsl-button-backgroundColor);
+    border: 1px solid var(--bsl-button-borderColor);
+    border-radius: 6px;
+    color: var(--bsl-textColor);
+    font: var(--bsl-font-sm);
+    font-weight: 500;
+    line-height: var(--bsl-line-height-sm);
+
+    &:hover {
+        background-color: var(--bsl-button-backgroundColor-hover);
+    }
+
+    &:active {
+        background-color: var(--bsl-button-backgroundColor-active);
+    }
+}
+
+svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+ngx-bsl-docs-navbar {
+    height: 100vh;
+    padding: 1rem 3rem 1rem 1rem;
+}
