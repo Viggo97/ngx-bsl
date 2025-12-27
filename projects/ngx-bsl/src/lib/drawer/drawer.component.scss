@@ -8,12 +8,12 @@ ngx-bsl-drawer {
     transform: translateY(0);
     transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
 
-    &.ngx-bsl-drawer-closed {
+    &.bsl-drawer-closed {
         transform: translateY(100%);
     }
 }
 
-.ngx-bsl-drawer-container {
+.bsl-drawer-container {
     height: 100%;
     padding: 24px;
     display: flex;
@@ -24,14 +24,14 @@ ngx-bsl-drawer {
     border-top-right-radius: 1rem;
 }
 
-ngx-bsl-drawer-header {
+.bsl-drawer-header {
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
 }
 
-.ngx-bsl-drawer-content {
+.bsl-drawer-content {
     overflow-y: auto;
     height: 100%;
 }

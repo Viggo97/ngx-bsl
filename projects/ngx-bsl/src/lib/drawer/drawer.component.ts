@@ -1,6 +1,14 @@
-import {afterNextRender, Component, ElementRef, inject, input, output, signal} from '@angular/core';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { IconXMarkComponent } from '../icons/icon-x-mark.component';
+import {afterNextRender,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    inject,
+    input,
+    output,
+    signal,
+    ViewEncapsulation} from '@angular/core';
+import {CdkTrapFocus} from '@angular/cdk/a11y';
+import {IconXMarkComponent} from '../icons/icon-x-mark.component';
 
 @Component({
     selector: 'ngx-bsl-drawer',
@@ -10,11 +18,13 @@ import { IconXMarkComponent } from '../icons/icon-x-mark.component';
     ],
     templateUrl: './drawer.component.html',
     styleUrl: './drawer.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         'role': 'dialog',
         'aria-modal': 'true',
         '[attr.aria-label]': 'title()',
-        '[class.ngx-bsl-drawer-closed]': 'isClosed()',
+        '[class.bsl-drawer-closed]': 'isClosed()',
         '(transitionend)': 'onTransitionEnd($event)',
     },
 })
@@ -32,6 +42,7 @@ export class DrawerComponent {
 
     close(): void {
         this.isClosed.set(true);
+        this.closed.emit();
     }
 
     protected onTransitionEnd(event: TransitionEvent) {
