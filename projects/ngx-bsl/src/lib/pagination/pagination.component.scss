@@ -1,10 +1,9 @@
 ngx-bsl-pagination {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 12px;
 
-    input {
+    input[type="number"] {
         width: 3.5rem;
         height: 2.25rem;
         padding: .5rem;
