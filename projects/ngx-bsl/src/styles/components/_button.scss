@@ -32,7 +32,7 @@ button {
     outline-offset: 2px;
   }
 
-  &.button-icon {
+  &.bsl-button-icon {
     padding: .5rem;
 
     span {
@@ -42,7 +42,7 @@ button {
     }
   }
 
-  &.invisible {
+  &.bsl-button-invisible {
     background-color: transparent;
     border-color: transparent;
 

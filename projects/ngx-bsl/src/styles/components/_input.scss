@@ -20,35 +20,6 @@ input[type="number"] {
   }
 }
 
-.input-with-icon {
-  position: relative;
-
-  input {
-    padding-left: 2rem;
-  }
-
-  [class^="icon-"] {
-    position: absolute;
-    top: 50%;
-    left: .5rem;
-    transform: translateY(-50%);
-    font: var(--bsl-font-md);
-    color: var(--bsl-input-textColor);
-  }
-}
-
-.input-large {
-  input {
-    padding: .75rem 1.5rem .75rem 3rem;
-    font: var(--bsl-font-lg);
-  }
-
-  [class^="icon-"] {
-    left: 1rem;
-    font: var(--bsl-font-lg);
-  }
-}
-
 /* Remove arrows Chrome */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
