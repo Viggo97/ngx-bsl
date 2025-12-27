@@ -1,4 +1,4 @@
-import {Component, HostListener, input, signal, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, input, model, signal, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {IconCheckComponent} from '../icons/icon-check.component';
 
@@ -16,13 +16,14 @@ import {IconCheckComponent} from '../icons/icon-check.component';
             useExisting: CheckboxComponent,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent implements ControlValueAccessor {
     id = input.required<string>();
+    disabled = model(false);
 
     protected checked = signal(false);
-    protected disabled = signal(false);
 
     onChange = (_value: boolean) => {};
     onTouch = () => {};
