@@ -67,7 +67,7 @@ implements ControlValueAccessor, OnInit {
             const hasOptions = this.listBox.listBoxOptions().length;
             if (this.optionChangedBy === 'input' && hasOptions) {
                 this.showListBox();
-            } else if (this.optionChangedBy === 'selection') {
+            } else if (this.optionChangedBy === 'selection' || !hasOptions) {
                 this.hideListBox();
             }
             this.optionChangedBy = null;
