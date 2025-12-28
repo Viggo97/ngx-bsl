@@ -1,4 +1,15 @@
-import {Component, ElementRef, inject, input, model, signal, OnInit, computed, viewChild, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy,
+    Component,
+    computed,
+    ElementRef,
+    inject,
+    input,
+    model,
+    OnDestroy,
+    OnInit,
+    signal,
+    viewChild,
+    ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RangeThumbComponent} from './range-thumb/range-thumb.component';
 import {RangeMoveDirection} from './range-move-direction.enum';
@@ -33,6 +44,8 @@ enum Thumb {
             useExisting: RangeComponent,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.aria-label]': 'null',
         '[attr.aria-labelledby]': 'null',

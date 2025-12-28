@@ -1,11 +1,13 @@
-import {Component,
+import {ChangeDetectionStrategy,
+    Component,
     DOCUMENT,
     ElementRef,
     inject,
     input,
     OnDestroy,
     output,
-    Renderer2} from '@angular/core';
+    Renderer2,
+    ViewEncapsulation} from '@angular/core';
 import {RangeMoveDirection} from '../range-move-direction.enum';
 
 @Component({
@@ -13,10 +15,12 @@ import {RangeMoveDirection} from '../range-move-direction.enum';
     imports: [],
     template: `
         @if (showLabel()) {
-            <span class="thumb-label">{{value()}}</span>
+            <span class="bsl-range-thumb-label">{{value()}}</span>
         }
     `,
     styleUrl: './range-thumb.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         '(keydown.arrowLeft)': 'positionChanged.emit(RangeMoveDirection.BACKWARD)',
         '(keydown.arrowRight)': 'positionChanged.emit(RangeMoveDirection.FORWARD)',

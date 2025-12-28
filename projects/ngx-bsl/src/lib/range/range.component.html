@@ -1,11 +1,11 @@
-<div class="range">
+<div class="bsl-range-container">
     <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
-    <div class="rail"
+    <div class="bsl-range-rail"
          [class.disabled]="disabled()"
          (click)="onRailClick($event)">
     </div>
 
-    <div class="tracker"
+    <div class="bsl-range-tracker"
          [class.disabled]="disabled()"
          [style.left]="trackerLeft()"
          [style.right]="trackerRight()">
@@ -52,7 +52,7 @@
     </ngx-bsl-range-thumb>
 </div>
 
-<div class="limits">
+<div class="bsl-range-limits">
     <span>{{ min() }}</span>
     <span>{{ max() }}</span>
 </div>
