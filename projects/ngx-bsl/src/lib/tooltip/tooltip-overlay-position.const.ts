@@ -2,25 +2,25 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 import { TooltipPosition } from './tooltip-position.enum';
 
 export const TOOLTIP_OVERLAY_POSITION: Record<TooltipPosition, ConnectedPosition> = {
-    TOP: {
+    top: {
         originX: 'center',
         originY: 'top',
         overlayX: 'center',
         overlayY: 'bottom',
     },
-    BOTTOM: {
+    bottom: {
         originX: 'center',
         originY: 'bottom',
         overlayX: 'center',
         overlayY: 'top',
     },
-    LEFT: {
+    left: {
         originX: 'start',
         originY: 'center',
         overlayX: 'end',
         overlayY: 'center',
     },
-    RIGHT: {
+    right: {
         originX: 'end',
         originY: 'center',
         overlayX: 'start',

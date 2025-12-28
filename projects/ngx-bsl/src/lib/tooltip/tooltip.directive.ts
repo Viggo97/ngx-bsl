@@ -16,7 +16,7 @@ import {TooltipPosition} from './tooltip-position.enum';
 })
 export class TooltipDirective {
     message = input.required<string>({alias: 'ngxBslTooltip'});
-    position = input(TooltipPosition.TOP);
+    position = input<TooltipPosition>('top');
 
     private overlay = inject(Overlay);
     private elementRef = inject(ElementRef) as ElementRef<HTMLElement>;
@@ -30,7 +30,7 @@ export class TooltipDirective {
             this.overlayRef = this.overlay.create({positionStrategy});
             const componentPortal = new ComponentPortal(TooltipComponent);
             const componentInstance = this.overlayRef.attach(componentPortal);
-            componentInstance.instance.message = this.message();
+            componentInstance.instance.message.set(this.message());
         }
     }
     protected hide(): void {
@@ -49,16 +49,16 @@ export class TooltipDirective {
         const tooltipOffset = 8;
 
         switch (this.position()) {
-            case TooltipPosition.TOP:
+            case 'top':
                 positionStrategy.withDefaultOffsetY(-tooltipOffset);
                 break;
-            case TooltipPosition.BOTTOM:
+            case 'bottom':
                 positionStrategy.withDefaultOffsetY(tooltipOffset);
                 break;
-            case TooltipPosition.LEFT:
+            case 'left':
                 positionStrategy.withDefaultOffsetX(-tooltipOffset);
                 break;
-            case TooltipPosition.RIGHT:
+            case 'right':
                 positionStrategy.withDefaultOffsetX(tooltipOffset);
                 break;
             default:
@@ -67,5 +67,4 @@ export class TooltipDirective {
 
         return positionStrategy;
     }
-
 }

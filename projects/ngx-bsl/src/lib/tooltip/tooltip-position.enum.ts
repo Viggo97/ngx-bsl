@@ -1,6 +1,1 @@
-export enum TooltipPosition {
-    TOP = 'TOP',
-    BOTTOM = 'BOTTOM',
-    LEFT = 'LEFT',
-    RIGHT = 'RIGHT',
-}
+export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
