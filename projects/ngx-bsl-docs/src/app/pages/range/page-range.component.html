@@ -1,0 +1,17 @@
+<h2>Range</h2>
+<p>Range component allows to set the range of numerical values using sliders. Value must be of type Range.
+Component support either direct binding by [value] or using FormControl.</p>
+
+<section>
+    <h3>Range</h3>
+    <ngx-bsl-range
+        style="width: 300px"
+        [min]="0"
+        [max]="10"
+        [value]="{from: 2, to: 7}"
+        [aria-label]="'Example range'"
+        [showThumbLabels]="true">
+    </ngx-bsl-range>
+    <pre><code class="language-typescript" [innerHTML]="rangeType()"></code></pre>
+    <pre><code class="language-xml" [innerHTML]="range()"></code></pre>
+</section>

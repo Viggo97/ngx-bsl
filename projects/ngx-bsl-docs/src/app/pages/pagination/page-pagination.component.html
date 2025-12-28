@@ -1,0 +1,17 @@
+<h2>Pagination</h2>
+<p>Pagination component allows to set current page by [page] input, total amount of items by [total] input
+    and number of items per page by [size] input. Additionally, it supports the following inputs to set aria- values
+    in different languages: nextPageAriaLabel, previousPageAriaLabel, firstPageAriaLabel, lastPageAriaLabel,
+    selectPageAriaLabel and selectPageAriaLabelledBy. Components emits pageChanged event with current page value.
+</p>
+
+<section>
+    <h3>Pagination</h3>
+    <ngx-bsl-pagination
+        style="width: 500px"
+        [page]="1"
+        [total]="30"
+        [size]="5">
+    </ngx-bsl-pagination>
+    <pre><code class="language-xml" [innerHTML]="pagination()"></code></pre>
+</section>

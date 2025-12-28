@@ -1,0 +1,25 @@
+<h2>Drawer</h2>
+<p>Drawer is a wrapper for the content and it works as a modal. It requires title as input and provide closed event.
+The recommended way is to use it with overlay.</p>
+
+<section>
+    <h3>Drawer</h3>
+    <button style="width: fit-content" cdkOverlayOrigin #drawerOrigin (click)="openDrawer()">Open drawer</button>
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="drawerOrigin"
+        [cdkConnectedOverlayOpen]="drawerOpen()"
+        [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        (overlayOutsideClick)="closeDrawer()"
+        (detach)="closeDrawer()">
+        <ngx-bsl-drawer
+            [title]="'Title of the drawer'"
+            (closed)="closeDrawer()">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. {{drawerOpen()}}
+        </ngx-bsl-drawer>
+    </ng-template>
+
+    <pre><code class="language-xml" [innerHTML]="drawerTemplate()"></code></pre>
+    <pre><code class="language-xml" [innerHTML]="drawerClass()"></code></pre>
+</section>

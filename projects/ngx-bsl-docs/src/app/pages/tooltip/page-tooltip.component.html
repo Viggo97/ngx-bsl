@@ -1,0 +1,20 @@
+<h2>Tooltip</h2>
+<p>Simply tooltip directive that allows to display additional information on hover or by focusing element.
+It supports top, bottom, left and right positions. Top is default.
+</p>
+
+<section>
+    <h3>Tooltip</h3>
+    <p style="width: fit-content" [ngxBslTooltip]="'Tooltip message'">Plain element with tooltip</p>
+    <button style="width: fit-content" [ngxBslTooltip]="'Tooltip message'">Button with tooltip</button>
+    <pre><code class="language-xml" [innerHTML]="tooltip()"></code></pre>
+</section>
+
+<section>
+    <h3>Tooltip positions</h3>
+    <button style="width: fit-content" [ngxBslTooltip]="'Tooltip message'" [position]="'top'">Tooltip top</button>
+    <button style="width: fit-content" [ngxBslTooltip]="'Tooltip message'" [position]="'bottom'">Tooltip bottom</button>
+    <button style="width: fit-content" [ngxBslTooltip]="'Tooltip message'" [position]="'left'">Tooltip left</button>
+    <button style="width: fit-content" [ngxBslTooltip]="'Tooltip message'" [position]="'right'">Tooltip right</button>
+    <pre><code class="language-xml" [innerHTML]="tooltipPositions()"></code></pre>
+</section>

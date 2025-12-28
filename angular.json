@@ -59,7 +59,8 @@
               }
             ],
             "styles": [
-              "projects/ngx-bsl-docs/src/styles.scss"
+              "projects/ngx-bsl-docs/src/styles.scss",
+              "node_modules/highlight.js/styles/base16/materia.css"
             ]
           },
           "configurations": {

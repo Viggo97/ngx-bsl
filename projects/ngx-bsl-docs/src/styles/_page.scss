@@ -1,0 +1,23 @@
+.page {
+    padding: 2rem;
+    display: block;
+
+    h2 {
+        margin-bottom: 8px;
+    }
+
+    pre {
+        font: var(--bsl-font-md);
+    }
+
+    code {
+        border-radius: 8px;
+    }
+
+    section {
+        margin: 16px 0 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
