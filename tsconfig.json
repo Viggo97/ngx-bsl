@@ -7,9 +7,6 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "ngx-bsl": [
-        "./dist/ngx-bsl"
-      ],
       "@ngx-bsl-lib": [
         "projects/ngx-bsl/src/public-api.ts"
       ]
