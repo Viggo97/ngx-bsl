@@ -39,7 +39,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-            name: lib-dist
+            name: docs-dist
             path: dist/ngx-bsl-docs
             retention-days: 1
 
