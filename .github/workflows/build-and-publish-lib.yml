@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build Library
+    name: Build Library and Docs
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +30,21 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lib-dist
-          path: dist/
+          path: dist/ngx-bsl
           retention-days: 1
 
-  publish:
-    name: Publish to NPM
+      - name: Build docs
+        run: npm run build:docs
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+            name: lib-dist
+            path: dist/ngx-bsl-docs
+            retention-days: 1
+
+  publish-lib:
+    name: Publish Library
     needs: build
     runs-on: ubuntu-latest
 
@@ -52,11 +62,28 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: lib-dist
-          path: dist/
+          path: dist/ngx-bsl
 
       - name: Publish to NPM
         run: |
-          cd dist/ngx-bsl
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-docs:
+    name: Publish Docs
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+            name: lib-dist
+            path: dist/ngx-bsl-docs
+
+      - name: Publish to GitHub Pages
+        uses: actions/deploy-pages@v4
