@@ -7,7 +7,8 @@ export class ListBoxDirective<TOption> {
     listBoxId = input<string>();
     listBoxAriaLabel = input<string>();
     listBoxAriaLabelledby = input<string>();
-    optionValueEquality = input<<V>(value: V, optionValue: V) => boolean>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    optionValueEquality = input<(value: any, optionValue: any) => boolean>(
         (value, optionValue) => value === optionValue,
     );
 
