@@ -83,18 +83,18 @@ export class SelectComponent<TOption, TValue> implements ControlValueAccessor, O
             if (option) {
                 this.value.set(this.optionValueParse()(option));
                 this.onChange(this.value() as TValue);
+                this.hideListBox();
             }
-            this.hideListBox();
         });
     }
 
     protected showListBox(): void {
+        if (this.open()) return;
         this.open.set(true);
-        this.listBox.initSelectedOption(this.value());
     }
 
     protected hideListBox(): void {
-        this.listBox.clearVisualFocus();
+        if (!this.open()) return;
         this.open.set(false);
     }
 
@@ -104,6 +104,7 @@ export class SelectComponent<TOption, TValue> implements ControlValueAccessor, O
         } else {
             if (this.listBox.listBoxOptions().length) {
                 this.showListBox();
+                this.listBox.setVisualMarkups(this.value());
             }
         }
     }
@@ -115,18 +116,14 @@ export class SelectComponent<TOption, TValue> implements ControlValueAccessor, O
     protected onKeydown(event: KeyboardEvent) {
         event.preventDefault();
 
-        if (!this.open()) {
-            this.showListBox();
-            if (event.code === 'ArrowUp') {
-                this.listBox.setVisualFocus(this.listBox.listBoxOptions().length - 1);
-                this.showListBox();
-            } else if (event.code === 'ArrowDown') {
-                if (!this.listBox.listBoxOptions().length) return;
-                this.listBox.setVisualFocus(0);
-                this.showListBox();
-            }
-        } else {
+        if (this.open()) {
             this.listBox.onKeydown(event);
+        } else {
+            this.showListBox();
+            const markupsSet = this.listBox.setVisualMarkups(this.value());
+            if (!markupsSet) {
+                this.listBox.onKeydown(event);
+            }
         }
     }
 

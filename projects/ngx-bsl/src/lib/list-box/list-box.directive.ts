@@ -7,8 +7,7 @@ export class ListBoxDirective<TOption> {
     listBoxId = input<string>();
     listBoxAriaLabel = input<string>();
     listBoxAriaLabelledby = input<string>();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    optionValueEquality = input<(value: any, optionValue: any) => boolean>(
+    optionValueEquality = input<<V>(value: V, optionValue: V) => boolean>(
         (value, optionValue) => value === optionValue,
     );
 
@@ -21,16 +20,18 @@ export class ListBoxDirective<TOption> {
     hasAriaSelected = true;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    initSelectedOption(value: any): void {
+    setVisualMarkups(value: any): boolean {
+        this.clearVisualFocus();
+        this.removeSelectedAttribute();
+
         const optionIndex = this.listBoxOptions()
             .findIndex(option => this.optionValueEquality()(value, option.value()));
         if (optionIndex !== -1) {
             this.setSelectedAttribute(optionIndex);
             this.setVisualFocus(optionIndex);
-        } else {
-            this.clearVisualFocus();
-            this.removeSelectedAttribute();
+            return true;
         }
+        return false;
     }
 
     onClick(event: MouseEvent): void {
@@ -107,7 +108,7 @@ export class ListBoxDirective<TOption> {
         return this.listBoxOptionRefs().findIndex(r => r.nativeElement.classList.contains('visual-focus'));
     }
 
-    setVisualFocus(optionIndex: number): void {
+    private setVisualFocus(optionIndex: number): void {
         const option = this.listBoxOptionRefs()[optionIndex];
         option.nativeElement.classList.add('visual-focus');
         this.ariaActiveDescendant.set(option.nativeElement.id);
@@ -118,7 +119,7 @@ export class ListBoxDirective<TOption> {
         this.ariaActiveDescendant.set(null);
     }
 
-    clearVisualFocus(): void {
+    private clearVisualFocus(): void {
         const optionIndex = this.getVisuallyFocusedOptionRefIndex();
         if (optionIndex !== -1) {
             this.removeVisualFocus(optionIndex);

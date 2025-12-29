@@ -67,6 +67,8 @@ implements ControlValueAccessor, OnInit {
             const hasOptions = this.listBox.listBoxOptions().length;
             if (this.optionChangedBy === 'input' && hasOptions) {
                 this.showListBox();
+                // Must be set after option components initialization.
+                setTimeout(() => this.listBox.setVisualMarkups(this.value()));
             } else if (this.optionChangedBy === 'selection' || !hasOptions) {
                 this.hideListBox();
             }
@@ -93,11 +95,12 @@ implements ControlValueAccessor, OnInit {
     }
 
     protected showListBox(): void {
+        if (this.open()) return;
         this.open.set(true);
     }
 
     protected hideListBox(): void {
-        this.listBox.clearVisualFocus();
+        if (!this.open()) return;
         this.open.set(false);
     }
 
@@ -107,6 +110,7 @@ implements ControlValueAccessor, OnInit {
         } else {
             if (this.listBox.listBoxOptions().length) {
                 this.showListBox();
+                this.listBox.setVisualMarkups(this.value());
             }
         }
     }
@@ -132,12 +136,9 @@ implements ControlValueAccessor, OnInit {
         this.value.set(value);
         this.optionChangedBy = 'input';
         if (this.listBox.listBoxOptions().length) {
-            if (this.open()) {
-                this.listBox.initSelectedOption(this.value());
-            }
-            else {
-                this.showListBox();
-            }
+            this.showListBox();
+            this.listBox.setVisualMarkups(this.value());
+
         }
         this.onChange(this.value());
     }
@@ -145,20 +146,16 @@ implements ControlValueAccessor, OnInit {
     protected onKeydown(event: KeyboardEvent) {
         event.preventDefault();
 
-        if (!this.open()) {
-            if (event.code === 'ArrowUp') {
-                if (!this.listBox.listBoxOptions().length) return;
-                this.listBox.setVisualFocus(this.listBox.listBoxOptions().length - 1);
-                this.showListBox();
-            } else if (event.code === 'ArrowDown') {
-                if (!this.listBox.listBoxOptions().length) return;
-                this.listBox.setVisualFocus(0);
-                this.showListBox();
-            } else if (event.code === 'Enter') {
-                this.confirmSelection.emit();
-            }
-        } else {
+        if (this.open()) {
             this.listBox.onKeydown(event);
+        } else if (event.code === 'Enter') {
+            this.confirmSelection.emit();
+        } else {
+            this.showListBox();
+            const markupsSet = this.listBox.setVisualMarkups(this.value());
+            if (!markupsSet) {
+                this.listBox.onKeydown(event);
+            }
         }
     }
 
