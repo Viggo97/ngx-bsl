@@ -10,7 +10,7 @@ import highlight from '../../../../highlightjs';
     ],
     template: `
         <section>
-            <h3>Select with grouped options</h3>
+            <h3>Select with options of type string and two-way binding</h3>
             <ngx-bsl-select
                 style="width: 200px"
                 [(value)]="value"
