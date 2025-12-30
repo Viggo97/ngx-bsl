@@ -1,11 +1,11 @@
 {
   "name": "ngx-bsl",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build:lib": "ng build ngx-bsl",
-    "build:docs": "ng build ngx-bsl-docs",
+    "build:docs": "ng build ngx-bsl-docs --base-href /ngx-bsl/",
     "watch": "ng build --watch --configuration development",
     "test:lib": "ng test ngx-bsl",
     "test:docs": "ng test ngx-bsl-docs",
