@@ -36,12 +36,14 @@ jobs:
       - name: Build docs
         run: npm run build:docs
 
+      - name: Copy index.html to 404.html for SPA routing
+        run: cp dist/ngx-bsl-docs/browser/index.html dist/ngx-bsl-docs/browser/404.html
+
       - name: Upload Docs build artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-            name: docs-dist
-            path: dist/ngx-bsl-docs
-            retention-days: 1
+          path: dist/ngx-bsl-docs/browser
+          retention-days: 1
 
   publish-lib:
     name: Publish Library
