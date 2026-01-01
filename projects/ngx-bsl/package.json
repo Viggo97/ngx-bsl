@@ -1,11 +1,11 @@
 {
   "name": "ngx-bsl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Viggo97/ngx-bsl.git"
   },
-  "homepage": "https://github.com/Viggo97/ngx-bsl.git#readme",
+  "homepage": "https://viggo97.github.io/ngx-bsl",
   "peerDependencies": {
     "@angular/cdk": "^21.0.0",
     "@angular/common": "^21.0.0",
