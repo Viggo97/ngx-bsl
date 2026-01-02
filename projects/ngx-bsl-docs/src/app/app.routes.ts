@@ -9,6 +9,7 @@ import {PageInputComponent} from './pages/input/page-input.component';
 import {PagePaginationComponent} from './pages/pagination/page-pagination.component';
 import {PageRangeComponent} from './pages/range/page-range.component';
 import {PageSelectComponent} from './pages/select/page-select.component';
+import {PageSkeletonComponent} from './pages/skeleton/page-skeleton.component';
 import {PageTooltipComponent} from './pages/tooltip/page-tooltip.component';
 import {PageInstallationComponent} from './pages/installation/page-installation';
 
@@ -56,6 +57,10 @@ export const routes: Routes = [
     {
         path: 'select',
         component: PageSelectComponent,
+    },
+    {
+        path: 'skeleton',
+        component: PageSkeletonComponent,
     },
     {
         path: 'tooltip',

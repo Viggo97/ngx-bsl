@@ -1,0 +1,19 @@
+<h2>Skeleton</h2>
+<p>
+    Visual markup representing pending state. There are three types of skeleton: rectangle (default), circle and square.
+    Width and height can be set in any units and apply to rectangle. Size applies to circle and square skeletons.
+</p>
+
+<section>
+    <h3>Rectangle (default)</h3>
+    <ngx-bsl-skeleton [width]="'150px'" [height]="'32px'"></ngx-bsl-skeleton>
+    <pre><code class="language-xml" [innerHTML]="skeletonRectangle()"></code></pre>
+
+    <h3>Circle</h3>
+    <ngx-bsl-skeleton type="circle" size="3rem"></ngx-bsl-skeleton>
+    <pre><code class="language-xml" [innerHTML]="skeletonCircle()"></code></pre>
+
+    <h3>Square</h3>
+    <ngx-bsl-skeleton type="square" size="3rem"></ngx-bsl-skeleton>
+    <pre><code class="language-xml" [innerHTML]="skeletonSquare()"></code></pre>
+</section>

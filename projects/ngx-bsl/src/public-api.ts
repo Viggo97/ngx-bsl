@@ -30,5 +30,7 @@ export {RangeComponent} from './lib/range/range.component';
 
 export {SelectComponent} from './lib/select/select.component';
 
+export {SkeletonComponent} from './lib/skeleton/skeleton.component';
+
 export {TooltipDirective} from './lib/tooltip/tooltip.directive';
 
