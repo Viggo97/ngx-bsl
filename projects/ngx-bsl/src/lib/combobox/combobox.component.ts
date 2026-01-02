@@ -151,6 +151,9 @@ implements ControlValueAccessor, OnInit {
         } else if (event.code === 'Enter') {
             this.confirmSelection.emit();
         } else {
+            if (!this.listBox.listBoxOptions().length) {
+                return;
+            }
             this.showListBox();
             const markupsSet = this.listBox.setVisualMarkups(this.value());
             if (!markupsSet) {
