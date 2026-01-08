@@ -13,7 +13,7 @@ import highlight from '../../../highlightjs';
 export class PagePaginationComponent implements OnInit {
     private paginationCode = `\
 <ngx-bsl-pagination
-    [(page)]="page"
+    [(page)]="page" //page = signal(2)
     [total]="30"
     [size]="5"
     (pageChange)="onPageChange()">
@@ -24,8 +24,4 @@ export class PagePaginationComponent implements OnInit {
         highlight.highlightAll();
     }
     page = signal(2);
-
-    onPageChange() {
-        console.log('page changed');
-    }
 }

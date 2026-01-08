@@ -11,8 +11,7 @@
         style="width: 500px"
         [(page)]="page"
         [total]="30"
-        [size]="5"
-        (pageChange)="onPageChange()">
+        [size]="5">
     </ngx-bsl-pagination>
     <p>Page: {{page()}}</p>
     <pre><code class="language-xml" [innerHTML]="pagination()"></code></pre>
