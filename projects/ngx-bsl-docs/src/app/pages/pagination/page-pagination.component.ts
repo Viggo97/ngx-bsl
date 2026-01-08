@@ -13,15 +13,19 @@ import highlight from '../../../highlightjs';
 export class PagePaginationComponent implements OnInit {
     private paginationCode = `\
 <ngx-bsl-pagination
-    style="width: 500px"
-    [page]="1"
+    [(page)]="page"
     [total]="30"
     [size]="5"
-    (pageChanged)="onPageChange($event)">
+    (pageChange)="onPageChange()">
 </ngx-bsl-pagination>`;
     protected pagination = signal(highlight.highlightAuto(this.paginationCode, ['xml']).value);
 
     ngOnInit() {
         highlight.highlightAll();
+    }
+    page = signal(2);
+
+    onPageChange() {
+        console.log('page changed');
     }
 }

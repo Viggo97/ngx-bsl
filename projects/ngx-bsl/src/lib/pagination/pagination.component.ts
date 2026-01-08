@@ -4,7 +4,6 @@ import {ChangeDetectionStrategy,
     ElementRef,
     input,
     model,
-    output,
     signal,
     viewChild,
     ViewEncapsulation} from '@angular/core';
@@ -37,30 +36,29 @@ export class PaginationComponent {
     selectPageAriaLabel = input('Select page');
     selectPageAriaLabelledBy = input<string | null>(null);
 
-    pageChanged = output<number>();
-
     protected inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
 
     protected pages = computed(() => Math.ceil(this.total() / this.size()));
     protected disabled = signal(false);
 
-    protected onInputBlur(value: number): void {
-        if (isNaN(value) || value < -1) {
+    protected onInputBlur(): void {
+        this.inputRef().nativeElement.value = this.page().toString();
+    }
+
+    protected onInputEnter(value: number): void {
+        if (isNaN(value) || value < 1) {
             this.page.set(1);
             this.inputRef().nativeElement.value = this.page().toString();
+            this.inputRef().nativeElement.focus();
         }
         else if (value > this.pages()) {
             this.page.set(this.pages());
             this.inputRef().nativeElement.value = this.page().toString();
+            this.inputRef().nativeElement.focus();
         }
         else {
             this.page.set(value);
         }
-        this.pageChanged.emit(this.page());
-    }
-
-    protected onInputEnter(): void {
-        this.pageChanged.emit(this.page());
     }
 
     protected onNextPage(event: PointerEvent): void {

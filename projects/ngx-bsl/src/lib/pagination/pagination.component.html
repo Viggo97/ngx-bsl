@@ -18,14 +18,15 @@
 
 <input
     type="number"
+    #inputRef
     [attr.aria-label]="selectPageAriaLabel()"
     [attr.aria-labelledby]="selectPageAriaLabelledBy()"
     [disabled]="disabled()"
     [min]="1"
     [max]="pages()"
     [value]="page()"
-    (blur)="onInputBlur($any($event.target).valueAsNumber)"
-    (keydown.enter)="onInputEnter()">
+    (blur)="onInputBlur()"
+    (keydown.enter)="onInputEnter($any($event.target).valueAsNumber)">
 
 <button
     type="button"
