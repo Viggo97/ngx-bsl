@@ -26,6 +26,9 @@ jobs:
       - name: Build library
         run: npm run build:lib
 
+      - name: Copy README
+        run: cp README.md dist/ngx-bsl
+
       - name: Upload Library build artifacts
         uses: actions/upload-artifact@v4
         with:
