@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {MainComponent} from './layout/main/main.component';
 import {PageButtonComponent} from './pages/button/page-button.component';
 import {PageCheckboxComponent} from './pages/checkbox/page-checkbox.component';
+import {PageCheckboxButtonComponent} from './pages/checkbox-button/page-checkbox-button.component';
 import {PageComboboxComponent} from './pages/combobox/page-combobox.component';
 import {PageDrawerComponent} from './pages/drawer/page-drawer.component';
 import {PageIconsComponent} from './pages/icons/page-icons.component';
@@ -29,6 +30,10 @@ export const routes: Routes = [
     {
         path: 'checkbox',
         component: PageCheckboxComponent,
+    },
+    {
+        path: 'checkbox-button',
+        component: PageCheckboxButtonComponent,
     },
     {
         path: 'combobox',

@@ -3,6 +3,8 @@ export {ComboboxComponent} from './lib/combobox/combobox.component';
 
 export {CheckboxComponent} from './lib/checkbox/checkbox.component';
 
+export {CheckboxButtonComponent} from './lib/checkbox-button/checkbox-button.component';
+
 export {DrawerComponent} from './lib/drawer/drawer.component';
 
 export {ListBoxDirective} from './lib/list-box/list-box.directive';

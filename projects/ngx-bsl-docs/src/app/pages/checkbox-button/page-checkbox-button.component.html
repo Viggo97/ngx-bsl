@@ -1,0 +1,19 @@
+<h2>Checkbox button</h2>
+<p>Simple checkbox button control. It requires to provide id attribute.</p>
+
+<section>
+    <h3>Checkbox button</h3>
+    <ngx-bsl-checkbox-button id="checkbox-button">
+        Content of the button checkbox
+    </ngx-bsl-checkbox-button>
+    <pre><code class="language-xml" [innerHTML]="checkboxButton()"></code></pre>
+</section>
+
+<section>
+    <h3>Disabled checkbox button</h3>
+    <p>Disabled state can be set either by [disabled] attribute or by using disable() method in FormControl.</p>
+    <ngx-bsl-checkbox-button id="disabled-checkbox-button" [disabled]="true">
+        Content of the disabled button checkbox
+    </ngx-bsl-checkbox-button>
+    <pre><code class="language-xml" [innerHTML]="disabledCheckboxButton()"></code></pre>
+</section>
