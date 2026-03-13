@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostListener, input, model, signal, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, model, signal, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {IconCheckComponent} from '../icons/icon-check.component';
 
@@ -18,6 +18,13 @@ import {IconCheckComponent} from '../icons/icon-check.component';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    host: {
+        '(keydown.enter)': 'onKeydown($event)',
+        '(keydown.space)': 'onKeydown($event)',
+        '(click)': 'onSelect()',
+        '(keyup.enter)': 'onSelect()',
+        '(keyup.space)': 'onSelect()',
+    },
 })
 export class CheckboxComponent implements ControlValueAccessor {
     id = input.required<string>();
@@ -25,8 +32,10 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     protected checked = signal(false);
 
-    onChange = (_value: boolean) => {};
-    onTouch = () => {};
+    onChange = (_value: boolean) => {
+    };
+    onTouch = () => {
+    };
 
     registerOnChange(onChange: (value: boolean) => void): void {
         this.onChange = onChange;
@@ -44,15 +53,10 @@ export class CheckboxComponent implements ControlValueAccessor {
         this.disabled.set(disabled);
     }
 
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
     onKeydown(event: Event): void {
         event.preventDefault();
     }
 
-    @HostListener('click')
-    @HostListener('keyup.enter')
-    @HostListener('keyup.space')
     onSelect(): void {
         if (this.disabled()) {
             return;
